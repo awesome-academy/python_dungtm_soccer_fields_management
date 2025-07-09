@@ -1,0 +1,9 @@
+{% load i18n %}
+<form action="{% url 'set_language' %}" method="post" class="mb-3" style="display:inline;">
+  {% csrf_token %}
+  <select name="language" class="form-select d-inline w-auto" onchange="this.form.submit()">
+    <p>LANGUAGE_CODE: {{ LANGUAGE_CODE }}</p>
+    <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>{% trans "English" %}</option>
+    <option value="vi" {% if LANGUAGE_CODE == 'vi' %}selected{% endif %}>{% trans "Vietnamese" %}</option>
+  </select>
+</form>
