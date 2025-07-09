@@ -1,0 +1,10 @@
+{% extends 'auth_generic.html' %}
+{% load i18n %}
+
+{% block content %}
+  <h4 class="mb-4 text-center">{% trans 'Thank you for visiting my website' %}</h4>
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
+  </form>
+{% endblock %}

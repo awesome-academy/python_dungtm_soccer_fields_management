@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-09 09:35+0700\n"
+"POT-Creation-Date: 2025-07-09 16:35+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: soccer/templates/auth_generic.html:6 soccer/templates/base_generic.html:6
+#: soccer/templates/base_generic.html:23
 msgid "Soccer Fields Management"
 msgstr "Quản lý sân bóng"
+
+#: soccer/templates/base_generic.html:27
+msgid "Logout"
+msgstr "Đăng xuất"
 
 #: soccer/templates/language_selector.html:6
 msgid "English"
@@ -30,7 +35,7 @@ msgstr "Tiếng Anh"
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: soccer/utils.py:11
+#: soccer/utils.py:12
 msgid "Account activation confirmation"
 msgstr "Xác nhận kích hoạt tài khoản"
 
@@ -63,6 +68,49 @@ msgstr ""
 #: templates/activation/activation_success.html:6
 msgid "Activation success"
 msgstr "Kích hoạt thành công"
+
+#: templates/registration/logged_out.html:5
+msgid "Thank you for visiting my website"
+msgstr "Cảm ơn bạn đã ghé thăm trang web của tôi"
+
+#: templates/registration/logged_out.html:8 templates/registration/login.html:6
+#: templates/registration/login.html:18
+#: templates/registration/password_reset_complete.html:8
+msgid "Login"
+msgstr "Đăng nhập"
+
+#: templates/registration/login.html:20
+msgid "Forgot your password?"
+msgstr "Quên mật khẩu?"
+
+#: templates/registration/password_reset_complete.html:4
+msgid "Password Reset Complete"
+msgstr "Đặt lại mật khẩu thành công"
+
+#: templates/registration/password_reset_complete.html:6
+msgid "You can now log in with your new password."
+msgstr "Bạn có thể đăng nhập bằng mật khẩu mới."
+
+#: templates/registration/password_reset_confirm.html:4
+msgid "Enter New Password"
+msgstr "Nhập mật khẩu mới"
+
+#: templates/registration/password_reset_confirm.html:8
+#: templates/registration/password_reset_form.html:4
+msgid "Reset Password"
+msgstr "Đặt lại mật khẩu"
+
+#: templates/registration/password_reset_done.html:4
+msgid "Password Reset Sent"
+msgstr "Đã gửi email đặt lại mật khẩu"
+
+#: templates/registration/password_reset_done.html:6
+msgid "Check your email for the link to reset your password."
+msgstr "Vui lòng kiểm tra email của bạn để lấy đường link đặt lại mật khẩu."
+
+#: templates/registration/password_reset_form.html:9
+msgid "Send reset email"
+msgstr "Gửi email đặt lại mật khẩu"
 
 #: templates/registration/register.html:6
 #: templates/registration/register.html:18
