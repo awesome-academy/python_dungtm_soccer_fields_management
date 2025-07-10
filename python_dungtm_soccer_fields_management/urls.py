@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register, name='register'),
     path('soccer/', include('soccer.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('activate/<uidb64>/<token>/', views.activate_account, name='activate_account'),
     path('i18n/', include('django.conf.urls.i18n')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
