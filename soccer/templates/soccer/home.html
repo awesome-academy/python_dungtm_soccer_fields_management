@@ -29,7 +29,9 @@
         <img src="{{ field.image.url }}" class="card-img-top" alt="{{ field.name }}">
         {% endif %}
         <div class="card-body">
-          <h5 class="card-title">{{ field.name }}</h5>
+          <h5 class="card-title">
+            <a href="{% url 'soccer_field_detail' field.pk %}">{{ field.name }}</a>
+          </h5>
           <p class="card-text mb-1"><b>{% trans "Type" %}:</b> {{ field.type }}</p>
           <p class="card-text mb-1"><b>{% trans "Address" %}:</b> {{ field.address }}</p>
           <p class="card-text mb-1"><b>{% trans "Phone" %}:</b> {{ field.phone }}</p>
