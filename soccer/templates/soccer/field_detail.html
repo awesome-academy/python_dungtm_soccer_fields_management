@@ -1,0 +1,38 @@
+{% extends 'base_generic.html' %}
+{% load humanize %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-md-6">
+        {% if field.image %}
+          <img src="{{ field.image.url }}" class="img-fluid rounded mb-3" alt="{{ field.name }}" />
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <h2>{{ field.name }}</h2>
+        <p>
+          <b>{% trans 'Type' %}:</b> {{ field.type }}
+        </p>
+        <p>
+          <b>{% trans 'Address' %}:</b> {{ field.address }}
+        </p>
+        <p>
+          <b>{% trans 'Phone' %}:</b> {{ field.phone }}
+        </p>
+        <p>
+          <b>{% trans 'Email' %}:</b> {{ field.email }}
+        </p>
+        <p>
+          <b>{% trans 'Price per hour' %}:</b> {{ field.price_per_hour|floatformat:0|intcomma }} VND
+        </p>
+        <p>
+          <b>{% trans 'Status' %}:</b> {{ field.status }}
+        </p>
+        <p class="small text-muted">{{ field.description }}</p>
+        <a href="{% url 'soccer_home' %}" class="btn btn-secondary mt-2">{% trans 'Back to list' %}</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

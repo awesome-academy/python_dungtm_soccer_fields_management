@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-11 11:54+0700\n"
+"POT-Creation-Date: 2025-07-11 15:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -91,6 +91,38 @@ msgstr "Tiếng Anh"
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
+#: soccer/templates/soccer/field_detail.html:16
+#: soccer/templates/soccer/home.html:35
+msgid "Type"
+msgstr "Loại sân"
+
+#: soccer/templates/soccer/field_detail.html:19
+#: soccer/templates/soccer/home.html:36
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: soccer/templates/soccer/field_detail.html:22
+#: soccer/templates/soccer/home.html:37
+msgid "Phone"
+msgstr "Số điện thoại"
+
+#: soccer/templates/soccer/field_detail.html:25
+msgid "Email"
+msgstr "Email"
+
+#: soccer/templates/soccer/field_detail.html:28
+#: soccer/templates/soccer/home.html:39
+msgid "Price per hour"
+msgstr "Giá mỗi giờ"
+
+#: soccer/templates/soccer/field_detail.html:31
+msgid "Status"
+msgstr "Trạng thái"
+
+#: soccer/templates/soccer/field_detail.html:34
+msgid "Back to list"
+msgstr "Trở lại danh sách"
+
 #: soccer/templates/soccer/home.html:7
 #, fuzzy
 #| msgid "Soccer Fields Management"
@@ -109,23 +141,7 @@ msgstr "Tất cả các loại"
 msgid "Filter"
 msgstr "Lọc"
 
-#: soccer/templates/soccer/home.html:33
-msgid "Type"
-msgstr "Loại sân"
-
-#: soccer/templates/soccer/home.html:34
-msgid "Address"
-msgstr "Địa chỉ"
-
-#: soccer/templates/soccer/home.html:35
-msgid "Phone"
-msgstr "Số điện thoại"
-
-#: soccer/templates/soccer/home.html:36
-msgid "Price per hour"
-msgstr "Giá mỗi giờ"
-
-#: soccer/templates/soccer/home.html:42
+#: soccer/templates/soccer/home.html:47
 msgid "No soccer fields found."
 msgstr "Không tìm thấy sân bóng nào."
 

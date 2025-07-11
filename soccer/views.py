@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404, render
 from soccer.utils import send_activation_email
 from soccer.forms import CustomUserCreationForm
 from django.contrib.auth.models import User
@@ -67,3 +66,7 @@ def home(request):
         'type_query': type_query,
         'field_types': field_types,
     })
+
+def detail(request, pk):
+    field = get_object_or_404(SoccerField, pk=pk)
+    return render(request, 'soccer/field_detail.html', {'field': field})
