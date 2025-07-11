@@ -1,5 +1,50 @@
 {% extends 'base_generic.html' %}
+{% load humanize %}
+{% load i18n %}
 
 {% block content %}
-  Home
+<div class="container py-4">
+  <h3 class="mb-4 text-center">{% trans "Soccer Fields" %}</h3>
+  <form method="get" class="row mb-4 gx-2">
+    <div class="col-sm-5 mb-2">
+      <input name="name" value="{{ name_query }}" class="form-control" placeholder="{% trans 'Search by field name...' %}">
+    </div>
+    <div class="col-sm-4 mb-2 h-100">
+      <select name="type" class="form-control">
+        <option value="">{% trans 'All types' %}</option>
+        {% for t in field_types %}
+          <option value="{{ t }}" {% if t == type_query %}selected{% endif %}>{{ t|capfirst }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-sm-3 mb-2">
+      <button type="submit" class="btn btn-primary w-100">{% trans 'Filter' %}</button>
+    </div>
+  </form>
+  <div class="row g-3">
+    {% for field in soccer_fields %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm h-100">
+        {% if field.image %}
+        <img src="{{ field.image.url }}" class="card-img-top" alt="{{ field.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ field.name }}</h5>
+          <p class="card-text mb-1"><b>{% trans "Type" %}:</b> {{ field.type }}</p>
+          <p class="card-text mb-1"><b>{% trans "Address" %}:</b> {{ field.address }}</p>
+          <p class="card-text mb-1"><b>{% trans "Phone" %}:</b> {{ field.phone }}</p>
+          <p class="card-text">
+            <b>{% trans "Price per hour" %}:</b>
+            {{ field.price_per_hour|floatformat:0|intcomma }} VND
+          </p>
+          <p class="card-text small text-muted">{{ field.description }}</p>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12"><p class="text-center">{% trans "No soccer fields found." %}</p></div>
+    {% endfor %}
+  </div>
+</div>
+{% include "pagination.html" %}
 {% endblock %}

@@ -16,12 +16,19 @@
     <header class="fixed-top bg-white shadow-sm">
       <div class="container-fluid px-4 py-2 d-flex align-items-center justify-content-between">
         <span class="fw-bold fs-5">{% trans 'Soccer Fields Management' %}</span>
-        {% if user.is_authenticated %}
-          <form action="{% url 'logout' %}" method="post" class="logout">
-            {% csrf_token %}
-            <button class="btn btn-outline-danger btn-sm">{% trans 'Logout' %}</button>
-          </form>
-        {% endif %}
+        <div class="row align-items-center">
+          <div class="col-auto">
+            {% include 'language_selector.html' %}
+          </div>
+          {% if user.is_authenticated %}
+            <div class="col-auto">
+              <form action="{% url 'logout' %}" method="post" class="logout mb-0">
+                {% csrf_token %}
+                <button class="btn btn-outline-danger btn-sm">{% trans 'Logout' %}</button>
+              </form>
+            </div>
+          {% endif %}
+        </div>
       </div>
     </header>
 

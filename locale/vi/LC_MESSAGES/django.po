@@ -8,18 +8,74 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-09 16:35+0700\n"
+"POT-Creation-Date: 2025-07-11 11:54+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language-Team: Vietnamese <vi@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: soccer/enums.py:5
+msgid "Active"
+msgstr "Hoạt động"
+
+#: soccer/enums.py:6
+msgid "Inactive"
+msgstr "Không hoạt động"
+
+#: soccer/enums.py:7
+msgid "Maintenance"
+msgstr "Bảo trì"
+
+#: soccer/enums.py:10 soccer/enums.py:21
+msgid "Pending"
+msgstr "Đang chờ"
+
+#: soccer/enums.py:11
+msgid "Confirmed"
+msgstr "Đã xác nhận"
+
+#: soccer/enums.py:12
+msgid "Cancelled"
+msgstr "Đã hủy"
+
+#: soccer/enums.py:13
+msgid "Completed"
+msgstr "Đã hoàn thành"
+
+#: soccer/enums.py:16
+msgid "Add Field"
+msgstr "Thêm sân"
+
+#: soccer/enums.py:17
+msgid "Update Field"
+msgstr "Cập nhật sân"
+
+#: soccer/enums.py:18
+msgid "Delete Field"
+msgstr "Xóa sân"
+
+#: soccer/enums.py:22
+msgid "Approved"
+msgstr "Đã duyệt"
+
+#: soccer/enums.py:23
+msgid "Rejected"
+msgstr "Từ chối"
+
+#: soccer/enums.py:26
+msgid "Indoor"
+msgstr "Trong nhà"
+
+#: soccer/enums.py:27
+msgid "Outdoor"
+msgstr "Ngoài trời"
+
 #: soccer/templates/auth_generic.html:6 soccer/templates/base_generic.html:6
-#: soccer/templates/base_generic.html:23
+#: soccer/templates/base_generic.html:18
 msgid "Soccer Fields Management"
 msgstr "Quản lý sân bóng"
 
@@ -34,6 +90,44 @@ msgstr "Tiếng Anh"
 #: soccer/templates/language_selector.html:7
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
+
+#: soccer/templates/soccer/home.html:7
+#, fuzzy
+#| msgid "Soccer Fields Management"
+msgid "Soccer Fields"
+msgstr "Sân bóng"
+
+#: soccer/templates/soccer/home.html:10
+msgid "Search by field name..."
+msgstr "Tìm theo tên sân..."
+
+#: soccer/templates/soccer/home.html:14
+msgid "All types"
+msgstr "Tất cả các loại"
+
+#: soccer/templates/soccer/home.html:21
+msgid "Filter"
+msgstr "Lọc"
+
+#: soccer/templates/soccer/home.html:33
+msgid "Type"
+msgstr "Loại sân"
+
+#: soccer/templates/soccer/home.html:34
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: soccer/templates/soccer/home.html:35
+msgid "Phone"
+msgstr "Số điện thoại"
+
+#: soccer/templates/soccer/home.html:36
+msgid "Price per hour"
+msgstr "Giá mỗi giờ"
+
+#: soccer/templates/soccer/home.html:42
+msgid "No soccer fields found."
+msgstr "Không tìm thấy sân bóng nào."
 
 #: soccer/utils.py:12
 msgid "Account activation confirmation"
