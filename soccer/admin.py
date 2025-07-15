@@ -17,7 +17,7 @@ class VoucherAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'soccer_field', 'time', 'status', 'voucher', 'created_at')
+    list_display = ('id', 'user', 'soccer_field', 'time', 'duration', 'status', 'voucher', 'created_at')
     list_filter = ('status', 'soccer_field')
     search_fields = ('user__username', 'soccer_field__name', 'note')
     date_hierarchy = 'time'

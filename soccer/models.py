@@ -5,7 +5,8 @@ from soccer.enums import (
     OrderStatus,
     RequestType,
     RequestStatus,
-    SoccerFieldType
+    SoccerFieldType,
+    OrderDurationChoice,
 )
 from soccer.constants import (
     MAX_LENGTH_16,
@@ -16,6 +17,7 @@ from soccer.constants import (
     MAX_DIGITS,
     DECIMAL_PLACES    
 )
+from datetime import timedelta
 
 # Create your models here.
 class SoccerField(models.Model):
@@ -58,10 +60,15 @@ class Order(models.Model):
         choices=OrderStatus.choices,
         default=OrderStatus.PENDING
     )
+    duration = models.PositiveIntegerField(choices=OrderDurationChoice.choices, default=OrderDurationChoice.DURATION_60)
     note = models.TextField(blank=True, null=True)
     voucher = models.ForeignKey(Voucher, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def end_time(self):
+        return self.time + timedelta(minutes=self.duration)
 
 class Rating(models.Model):
     soccer_field = models.ForeignKey(SoccerField, on_delete=models.CASCADE)

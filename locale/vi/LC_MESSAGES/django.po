@@ -1,15 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Vietnamese translation for Soccer Fields Management
+# Copyright (C) 2025 YOUR NAME
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Soccer Fields Management 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-11 15:08+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2025-07-15 15:43+0700\n"
+"PO-Revision-Date: 2025-07-15 15:43+0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "Language: vi\n"
@@ -74,8 +73,37 @@ msgstr "Trong nhà"
 msgid "Outdoor"
 msgstr "Ngoài trời"
 
-#: soccer/templates/auth_generic.html:6 soccer/templates/base_generic.html:6
-#: soccer/templates/base_generic.html:18
+#: soccer/enums.py:30
+msgid "60 minutes"
+msgstr "60 phút"
+
+#: soccer/enums.py:31
+msgid "90 minutes"
+msgstr "90 phút"
+
+#: soccer/enums.py:32
+msgid "120 minutes"
+msgstr "120 phút"
+
+#: soccer/enums.py:33
+msgid "150 minutes"
+msgstr "150 phút"
+
+#: soccer/enums.py:34
+msgid "180 minutes"
+msgstr "180 phút"
+
+#: soccer/forms.py:25
+msgid "Order Time"
+msgstr "Thời gian đặt"
+
+#: soccer/forms.py:30 soccer/templates/soccer/order_detail.html:35 \
+soccer/templates/soccer/order_field.html:26
+msgid "Note"
+msgstr "Ghi chú"
+
+#: soccer/templates/auth_generic.html:6 soccer/templates/base_generic.html:6 \
+soccer/templates/base_generic.html:18
 msgid "Soccer Fields Management"
 msgstr "Quản lý sân bóng"
 
@@ -91,41 +119,58 @@ msgstr "Tiếng Anh"
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: soccer/templates/soccer/field_detail.html:16
-#: soccer/templates/soccer/home.html:35
+#: soccer/templates/soccer/403.html:4
+msgid "You do not have permission to access this page."
+msgstr "Bạn không có quyền truy cập trang này."
+
+#: soccer/templates/soccer/403.html:5
+msgid "Back to home page"
+msgstr "Về trang chủ"
+
+#: soccer/templates/soccer/field_detail.html:16 \
+soccer/templates/soccer/home.html:35 \
+soccer/templates/soccer/order_detail.html:43
 msgid "Type"
 msgstr "Loại sân"
 
-#: soccer/templates/soccer/field_detail.html:19
-#: soccer/templates/soccer/home.html:36
+#: soccer/templates/soccer/field_detail.html:19 \
+soccer/templates/soccer/home.html:36 \
+soccer/templates/soccer/order_detail.html:40
 msgid "Address"
 msgstr "Địa chỉ"
 
-#: soccer/templates/soccer/field_detail.html:22
-#: soccer/templates/soccer/home.html:37
+#: soccer/templates/soccer/field_detail.html:22 \
+soccer/templates/soccer/home.html:37 \
+soccer/templates/soccer/order_detail.html:46
 msgid "Phone"
 msgstr "Số điện thoại"
 
-#: soccer/templates/soccer/field_detail.html:25
+#: soccer/templates/soccer/field_detail.html:25 \
+soccer/templates/soccer/order_detail.html:49
 msgid "Email"
 msgstr "Email"
 
-#: soccer/templates/soccer/field_detail.html:28
-#: soccer/templates/soccer/home.html:39
+#: soccer/templates/soccer/field_detail.html:28 \
+soccer/templates/soccer/home.html:39 \
+soccer/templates/soccer/order_detail.html:26
 msgid "Price per hour"
 msgstr "Giá mỗi giờ"
 
-#: soccer/templates/soccer/field_detail.html:31
+#: soccer/templates/soccer/field_detail.html:31 \
+soccer/templates/soccer/order_detail.html:23
 msgid "Status"
 msgstr "Trạng thái"
 
 #: soccer/templates/soccer/field_detail.html:34
+msgid "Order this field"
+msgstr "Đặt sân này"
+
+#: soccer/templates/soccer/field_detail.html:35 \
+soccer/templates/soccer/order_detail.html:53
 msgid "Back to list"
 msgstr "Trở lại danh sách"
 
 #: soccer/templates/soccer/home.html:7
-#, fuzzy
-#| msgid "Soccer Fields Management"
 msgid "Soccer Fields"
 msgstr "Sân bóng"
 
@@ -145,9 +190,72 @@ msgstr "Lọc"
 msgid "No soccer fields found."
 msgstr "Không tìm thấy sân bóng nào."
 
+#: soccer/templates/soccer/order_detail.html:11
+msgid "Order Details"
+msgstr "Chi tiết đơn đặt"
+
+#: soccer/templates/soccer/order_detail.html:17 \
+soccer/templates/soccer/order_field.html:12
+msgid "Time"
+msgstr "Thời gian"
+
+#: soccer/templates/soccer/order_detail.html:20 \
+soccer/templates/soccer/order_field.html:55
+msgid "Total Price"
+msgstr "Tổng tiền"
+
+#: soccer/templates/soccer/order_detail.html:30 \
+soccer/templates/soccer/order_field.html:33
+msgid "Voucher"
+msgstr "Mã giảm giá"
+
+#: soccer/templates/soccer/order_field.html:8
+msgid "Order Soccer Field"
+msgstr "Đặt sân bóng"
+
+#: soccer/templates/soccer/order_field.html:19
+msgid "Duration"
+msgstr "Thời lượng"
+
+#: soccer/templates/soccer/order_field.html:36
+msgid "No voucher"
+msgstr "Không có mã giảm giá"
+
+#: soccer/templates/soccer/order_field.html:46
+msgid "Description"
+msgstr "Mô tả"
+
+#: soccer/templates/soccer/order_field.html:47
+msgid "Discount"
+msgstr "Giảm giá"
+
+#: soccer/templates/soccer/order_field.html:48
+msgid "Valid"
+msgstr "Còn hiệu lực"
+
+#: soccer/templates/soccer/order_field.html:49
+msgid "Min price"
+msgstr "Giá tối thiểu"
+
+#: soccer/templates/soccer/order_field.html:50
+msgid "Max discount"
+msgstr "Giảm tối đa"
+
+#: soccer/templates/soccer/order_field.html:51
+msgid "Rest quantity"
+msgstr "Số lượng còn lại"
+
+#: soccer/templates/soccer/order_field.html:61
+msgid "Order"
+msgstr "Đặt"
+
 #: soccer/utils.py:12
 msgid "Account activation confirmation"
 msgstr "Xác nhận kích hoạt tài khoản"
+
+#: soccer/views.py:106
+msgid "This time slot has already been booked. Please select another time."
+msgstr "Khung giờ này đã có người đặt. Vui lòng chọn thời gian khác."
 
 #: templates/activation/activation_email.html:2
 #, python-format
@@ -183,9 +291,9 @@ msgstr "Kích hoạt thành công"
 msgid "Thank you for visiting my website"
 msgstr "Cảm ơn bạn đã ghé thăm trang web của tôi"
 
-#: templates/registration/logged_out.html:8 templates/registration/login.html:6
-#: templates/registration/login.html:18
-#: templates/registration/password_reset_complete.html:8
+#: templates/registration/logged_out.html:8 templates/registration/login.html:6 \
+templates/registration/login.html:18 \
+templates/registration/password_reset_complete.html:8
 msgid "Login"
 msgstr "Đăng nhập"
 
@@ -205,8 +313,8 @@ msgstr "Bạn có thể đăng nhập bằng mật khẩu mới."
 msgid "Enter New Password"
 msgstr "Nhập mật khẩu mới"
 
-#: templates/registration/password_reset_confirm.html:8
-#: templates/registration/password_reset_form.html:4
+#: templates/registration/password_reset_confirm.html:8 \
+templates/registration/password_reset_form.html:4
 msgid "Reset Password"
 msgstr "Đặt lại mật khẩu"
 
@@ -222,8 +330,8 @@ msgstr "Vui lòng kiểm tra email của bạn để lấy đường link đặt
 msgid "Send reset email"
 msgstr "Gửi email đặt lại mật khẩu"
 
-#: templates/registration/register.html:6
-#: templates/registration/register.html:18
+#: templates/registration/register.html:6 \
+templates/registration/register.html:18
 msgid "Register"
 msgstr "Đăng ký"
 

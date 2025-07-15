@@ -1,0 +1,65 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+  <div class="container py-4" id="order-field-root" data-price="{{ field.price_per_hour|floatformat:'2' }}">
+    <h3 class="mb-4">{% trans 'Order Soccer Field' %}: {{ field.name }}</h3>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label><b>{% trans 'Time' %}</b></label>
+        {{ form.time }}
+        {% if form.time.errors %}
+          <div class="text-danger small">{{ form.time.errors }}</div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label><b>{% trans 'Duration' %}</b></label>
+        {{ form.duration }}
+        {% if form.duration.errors %}
+          <div class="text-danger small">{{ form.duration.errors }}</div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label><b>{% trans 'Note' %}</b></label>
+        {{ form.note }}
+        {% if form.note.errors %}
+          <div class="text-danger small">{{ form.note.errors }}</div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label><b>{% trans 'Voucher' %}</b></label>
+        <select name="voucher" class="form-control" id="voucher-select">
+          <option value="">
+            {% trans 'No voucher' %}
+          </option>
+          {% for v in vouchers %}
+            <option value="{{ v.id }}" data-description="{{ v.description|default:'' }}" data-discount="{{ v.discount_percent }}" data-validfrom="{{ v.valid_from|date:'d/m/Y' }}" data-validto="{{ v.valid_to|date:'d/m/Y' }}" data-minprice="{{ v.min_price }}" data-maxdiscount="{{ v.max_discount_amount }}" data-rest="{{ v.rest_quantity }}">{{ v.code }} ({{ v.discount_percent }}%)</option>
+          {% endfor %}
+        </select>
+        {% if form.voucher.errors %}
+          <div class="text-danger small">{{ form.voucher.errors }}</div>
+        {% endif %}
+        <div id="voucher-detail" class="bg-light rounded p-2 mt-2 border" style="display:none;">
+          <b>{% trans 'Description' %}:</b> <span id="voucher-description"></span><br />
+          <b>{% trans 'Discount' %}:</b> <span id="voucher-discount"></span>%<br />
+          <b>{% trans 'Valid' %}:</b> <span id="voucher-validfrom"></span> - <span id="voucher-validto"></span><br />
+          <b>{% trans 'Min price' %}:</b> <span id="voucher-minprice"></span><br />
+          <b>{% trans 'Max discount' %}:</b> <span id="voucher-maxdiscount"></span><br />
+          <b>{% trans 'Rest quantity' %}:</b> <span id="voucher-rest"></span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label><b>{% trans 'Total Price' %}</b></label>
+        <div id="total-price" class="form-control-plaintext fw-bold">{{ total_price|floatformat:0|intcomma }} VND</div>
+      </div>
+      {% if error_message %}
+        <div class="alert alert-danger">{{ error_message }}</div>
+      {% endif %}
+      <button class="btn btn-success">{% trans 'Order' %}</button>
+    </form>
+  </div>
+  <script src="{% static 'js/order_field.js' %}"></script>
+{% endblock %}

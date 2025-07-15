@@ -1,0 +1,6 @@
+{% extends 'soccer/base_generic.html' %}
+
+{% block content %}
+  <h1>{% trans 'You do not have permission to access this page.' %}</h1>
+  <a href="{% url 'soccer_home' %}">{% trans 'Back to home page' %}</a>
+{% endblock %}
