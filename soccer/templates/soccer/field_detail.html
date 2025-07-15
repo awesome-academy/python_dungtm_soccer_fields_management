@@ -31,6 +31,7 @@
           <b>{% trans 'Status' %}:</b> {{ field.status }}
         </p>
         <p class="small text-muted">{{ field.description }}</p>
+        <a href="{% url 'order_field' field.pk %}" class="btn btn-primary mt-2">{% trans 'Order this field' %}</a>
         <a href="{% url 'soccer_home' %}" class="btn btn-secondary mt-2">{% trans 'Back to list' %}</a>
       </div>
     </div>

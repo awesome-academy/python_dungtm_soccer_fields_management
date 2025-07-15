@@ -13,7 +13,7 @@ def send_activation_email(request, user):
     token = default_token_generator.make_token(user)
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     activation_link = f"http://{current_site.domain}/activate/{uid}/{token}/"
-    message = render_to_string("activation_email.html", {
+    message = render_to_string("activation/.activation_email.html", {
         "user": user,
         "activation_link": activation_link,
         "current_site": current_site,   
