@@ -6,4 +6,9 @@ urlpatterns = [
     path('field/<int:pk>/', views.detail, name='soccer_field_detail'),
     path('field/<int:pk>/order', views.order_field, name='order_field'),
     path('order/<int:pk>/', views.order_detail, name='order_detail'),
+    path("vouchers/", views.voucher_list_user, name="voucher_list"),
+    path("vouchers/manage", views.voucher_list_admin, name="voucher_list_admin"),
+    path("vouchers/add/", views.voucher_create, name="voucher_create"),
+    path("vouchers/<int:pk>/edit/", views.voucher_edit, name="voucher_edit"),
+    path("vouchers/<int:pk>/delete/", views.voucher_delete, name="voucher_delete"),
 ]

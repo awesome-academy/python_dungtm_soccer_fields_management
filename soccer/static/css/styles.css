@@ -11,3 +11,23 @@ body {
 .logout {
   margin: 0;
 }
+
+.min-h-100 {
+  min-height: 100vh;
+}
+
+.inline {
+  display: inline;
+}
+
+.hidden {
+  display: none;
+}
+
+.max-w-480 {
+  max-width: 480px;
+}
+
+.max-w-600 {
+  max-width: 600px;
+}

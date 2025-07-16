@@ -47,6 +47,7 @@ class Voucher(models.Model):
     min_price = models.DecimalField(max_digits=MAX_DIGITS, decimal_places=DECIMAL_PLACES, default=DEFAULT_0)
     max_discount_amount = models.DecimalField(max_digits=MAX_DIGITS, decimal_places=DECIMAL_PLACES, default=DEFAULT_0)
     rest_quantity = models.PositiveIntegerField(default=0)
+    deleted_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.code

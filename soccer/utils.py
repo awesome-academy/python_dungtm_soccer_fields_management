@@ -19,3 +19,6 @@ def send_activation_email(request, user):
         "current_site": current_site,   
     })
     send_mail(subject, message, os.environ.get("EMAIL_HOST_ADDRESS"), [user.email])
+
+def user_in_group(user, group_name):
+    return user.is_authenticated and user.groups.filter(name=group_name).exists()

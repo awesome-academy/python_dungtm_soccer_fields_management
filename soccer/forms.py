@@ -45,3 +45,12 @@ class OrderFieldForm(forms.ModelForm):
         self.fields['voucher'].queryset = Voucher.objects.filter(rest_quantity__gt=0)
         self.fields['voucher'].required = False
         self.fields['voucher'].widget.attrs.update({'class': 'form-control'})
+
+class VoucherForm(forms.ModelForm):
+    class Meta:
+        model = Voucher
+        fields = ["code", "description", "discount_percent", "valid_from", "valid_to", "min_price", "max_discount_amount", "rest_quantity"]
+        widgets = {
+            'valid_from': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
+            'valid_to': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
+        }

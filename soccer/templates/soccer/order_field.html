@@ -36,13 +36,13 @@
             {% trans 'No voucher' %}
           </option>
           {% for v in vouchers %}
-            <option value="{{ v.id }}" data-description="{{ v.description|default:'' }}" data-discount="{{ v.discount_percent }}" data-validfrom="{{ v.valid_from|date:'d/m/Y' }}" data-validto="{{ v.valid_to|date:'d/m/Y' }}" data-minprice="{{ v.min_price }}" data-maxdiscount="{{ v.max_discount_amount }}" data-rest="{{ v.rest_quantity }}">{{ v.code }} ({{ v.discount_percent }}%)</option>
+            <option value="{{ v.id }}" data-description="{{ v.description|default:'' }}" data-discount="{{ v.discount_percent }}" data-validfrom="{{ v.valid_from|date:DATE_FORMAT }}" data-validto="{{ v.valid_to|date:DATE_FORMAT }}" data-minprice="{{ v.min_price }}" data-maxdiscount="{{ v.max_discount_amount }}" data-rest="{{ v.rest_quantity }}">{{ v.code }} ({{ v.discount_percent }}%)</option>
           {% endfor %}
         </select>
         {% if form.voucher.errors %}
           <div class="text-danger small">{{ form.voucher.errors }}</div>
         {% endif %}
-        <div id="voucher-detail" class="bg-light rounded p-2 mt-2 border" style="display:none;">
+        <div id="voucher-detail" class="bg-light rounded p-2 mt-2 border hidden">
           <b>{% trans 'Description' %}:</b> <span id="voucher-description"></span><br />
           <b>{% trans 'Discount' %}:</b> <span id="voucher-discount"></span>%<br />
           <b>{% trans 'Valid' %}:</b> <span id="voucher-validfrom"></span> - <span id="voucher-validto"></span><br />
