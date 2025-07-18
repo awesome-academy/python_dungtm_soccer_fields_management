@@ -1,0 +1,80 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="container py-4 max-w-600">
+    <h3 class="mb-4 text-center">{{ title }}</h3>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label><b>{% trans 'Code' %}</b></label>
+        {{ form.code|add_class:'form-control' }}
+        {% if form.code.errors %}
+          <div class="text-danger small">{{ form.code.errors }}</div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label><b>{% trans 'Description' %}</b></label>
+        {{ form.description|add_class:'form-control' }}
+        {% if form.description.errors %}
+          <div class="text-danger small">{{ form.description.errors }}</div>
+        {% endif %}
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label><b>{% trans 'Discount' %}(%)</b></label>
+          {{ form.discount_percent|add_class:'form-control' }}
+          {% if form.discount_percent.errors %}
+            <div class="text-danger small">{{ form.discount_percent.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6 mb-3">
+          <label><b>{% trans 'Rest quantity' %}</b></label>
+          {{ form.rest_quantity|add_class:'form-control' }}
+          {% if form.rest_quantity.errors %}
+            <div class="text-danger small">{{ form.rest_quantity.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label><b>{% trans 'Min price' %}</b></label>
+          {{ form.min_price|add_class:'form-control' }}
+          {% if form.min_price.errors %}
+            <div class="text-danger small">{{ form.min_price.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6 mb-3">
+          <label><b>{% trans 'Max discount' %}</b></label>
+          {{ form.max_discount_amount|add_class:'form-control' }}
+          {% if form.max_discount_amount.errors %}
+            <div class="text-danger small">{{ form.max_discount_amount.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label><b>{% trans 'Valid from' %}</b></label>
+          {{ form.valid_from|add_class:'form-control' }}
+          {% if form.valid_from.errors %}
+            <div class="text-danger small">{{ form.valid_from.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6 mb-3">
+          <label><b>{% trans 'Valid to' %}</b></label>
+          {{ form.valid_to|add_class:'form-control' }}
+          {% if form.valid_to.errors %}
+            <div class="text-danger small">{{ form.valid_to.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mb-3 text-end">
+        <button class="btn btn-success">{% trans 'Save' %}</button>
+        <a href="{% url 'voucher_list' %}" class="btn btn-secondary">{% trans 'Cancel' %}</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

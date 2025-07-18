@@ -1,0 +1,107 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+  <div class="container py-4">
+    <h3 class="mb-4 text-center">{% trans 'Vouchers' %}</h3>
+    <div class="mb-3 text-end">
+      <a href="{% url 'voucher_create' %}" class="btn btn-primary"><i class="bi bi-plus-circle"></i> {% trans 'Add Voucher' %}</a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>
+              {% trans 'Code' %}
+            </th>
+            <th>
+              {% trans 'Description' %}
+            </th>
+            <th>
+              {% trans 'Discount' %}(%)
+            </th>
+            <th>
+              {% trans 'Min price' %}
+            </th>
+            <th>
+              {% trans 'Max discount' %}
+            </th>
+            <th>
+              {% trans 'Valid' %}
+            </th>
+            <th>
+              {% trans 'Rest quantity' %}
+            </th>
+            <th>
+              {% trans 'Status' %}
+            </th>
+            <th>
+              {% trans 'Actions' %}
+            </th>
+            <th>
+              {% trans 'Deleted at' %}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for v in vouchers %}
+            <tr class="{% if v.deleted_at %}
+                {% if v.deleted_at <= now %}
+                  
+                    table-danger
+
+                {% else %}
+                  
+                    table-warning
+
+                {% endif %}
+              {% elif v.valid_to < now %}
+                
+                  table-secondary
+
+              {% endif %}">
+              <td>{{ forloop.counter }}</td>
+              <td>
+                <b>{{ v.code }}</b>
+              </td>
+              <td class="small">{{ v.description|default:'-' }}</td>
+              <td>{{ v.discount_percent }}</td>
+              <td>{{ v.min_price|floatformat:0|intcomma }} VND</td>
+              <td>{{ v.max_discount_amount|floatformat:0|intcomma }} VND</td>
+              <td>{{ v.valid_from|date:DATE_FORMAT }} - {{ v.valid_to|date:DATE_FORMAT }}</td>
+              <td>{{ v.rest_quantity }}</td>
+              <td>
+                {% if v.deleted_at %}
+                  <span class="badge bg-danger">{% trans 'Deleted' %}</span>
+                {% elif v.valid_to < now %}
+                  <span class="badge bg-secondary">{% trans 'Expired' %}</span>
+                {% else %}
+                  <span class="badge bg-success">{% trans 'Active' %}</span>
+                {% endif %}
+              </td>
+              <td>
+                <a href="{% url 'voucher_edit' v.pk %}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i> {% trans 'Edit' %}</a>
+                <a href="{% url 'voucher_delete' v.pk %}" class="btn btn-sm btn-danger ms-1"><i class="bi bi-trash"></i> {% trans 'Delete' %}</a>
+              </td>
+              <td>
+                {% if v.deleted_at %}
+                  {{ v.deleted_at|date:DATE_FORMAT }}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="10" class="text-center">
+                {% trans 'No vouchers found.' %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

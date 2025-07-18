@@ -10,7 +10,7 @@ class SoccerFieldAdmin(admin.ModelAdmin):
 
 @admin.register(Voucher)
 class VoucherAdmin(admin.ModelAdmin):
-    list_display = ('code', 'description', 'discount_percent', 'valid_from', 'valid_to', 'min_price', 'max_discount_amount', 'rest_quantity')
+    list_display = ('code', 'description', 'discount_percent', 'valid_from', 'valid_to', 'min_price', 'max_discount_amount', 'rest_quantity', 'deleted_at')
     search_fields = ('code', 'description')
     list_filter = ('valid_from', 'valid_to')
     ordering = ('-valid_from',)
