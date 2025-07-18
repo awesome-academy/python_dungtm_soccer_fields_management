@@ -57,7 +57,7 @@ class Order(models.Model):
     time = models.DateTimeField()
     soccer_field = models.ForeignKey(SoccerField, on_delete=models.CASCADE)
     status = models.CharField(
-        max_length=MAX_LENGTH_16,
+        max_length=MAX_LENGTH_32,
         choices=OrderStatus.choices,
         default=OrderStatus.PENDING
     )
@@ -66,6 +66,7 @@ class Order(models.Model):
     voucher = models.ForeignKey(Voucher, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    cancel_reason = models.TextField(blank=True, null=True)
 
     @property
     def end_time(self):

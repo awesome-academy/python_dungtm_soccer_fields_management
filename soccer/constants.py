@@ -11,3 +11,4 @@ DEFAULT_0 = 0
 GROUP_ADMIN = "Admin"
 DATE_FORMAT = 'd/m/Y'
 DATE_TIME_FORMAT = 'd/m/Y H:i'
+TIME_FORMAT = 'H:i'
