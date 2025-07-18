@@ -11,4 +11,9 @@ urlpatterns = [
     path("vouchers/add/", views.voucher_create, name="voucher_create"),
     path("vouchers/<int:pk>/edit/", views.voucher_edit, name="voucher_edit"),
     path("vouchers/<int:pk>/delete/", views.voucher_delete, name="voucher_delete"),
+    path('my-orders/', views.my_orders, name='my_orders'),
+    path('order/<int:pk>/edit/', views.order_edit, name='order_edit'),
+    path('order/<int:pk>/cancel/', views.order_cancel, name='order_cancel'),
+    path('admin/orders/', views.all_orders, name='all_orders'),
+    path('admin/order/<int:pk>/cancel/', views.admin_cancel_order, name='admin_cancel_order'),
 ]
