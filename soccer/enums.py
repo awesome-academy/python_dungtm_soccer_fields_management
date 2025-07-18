@@ -9,7 +9,8 @@ class SoccerFieldStatus(models.TextChoices):
 class OrderStatus(models.TextChoices):
     PENDING = 'pending', _('Pending')
     CONFIRMED = 'confirmed', _('Confirmed')
-    CANCELLED = 'cancelled', _('Cancelled')
+    CANCELLED_BY_USER = 'cancelled_by_user', _('Cancelled by User')
+    CANCELLED_BY_ADMIN = 'cancelled_by_admin', _('Cancelled by Admin')
     COMPLETED = 'completed', _('Completed')
 
 class RequestType(models.TextChoices):
