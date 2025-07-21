@@ -42,7 +42,7 @@
               <td>{{ order.duration }}</td>
               <td>{{ order.get_status_display }}</td>
               <td>
-                <a href="{% url 'order_detail' order.pk %}" class="btn btn-sm btn-info">{% trans 'Detail' %}</a>
+                <a href="{% url 'admin_order_detail' order.pk %}" class="btn btn-sm btn-info">{% trans 'Detail' %}</a>
                 {% if order.status == OrderStatus.PENDING or order.status == OrderStatus.CONFIRMED %}
                   <a href="{% url 'admin_cancel_order' order.pk %}" class="btn btn-sm btn-danger">{% trans 'Cancel' %}</a>
                 {% endif %}
