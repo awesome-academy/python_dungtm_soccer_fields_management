@@ -1,0 +1,92 @@
+{% extends 'base_generic.html' %}
+{% load humanize %}
+{% load static %}
+{% load i18n %}
+{% load order_extras %}
+
+{% block content %}
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-md-7">
+        <h2>{% trans 'Order Detail' %}</h2>
+        <p>
+          <b>{% trans 'User' %}:</b> {{ order.user.get_full_name|default:order.user.username }}
+        </p>
+        <p>
+          <b>{% trans 'Field' %}:</b> {{ order.soccer_field.name }}
+        </p>
+        <p>
+          <b>{% trans 'Time' %}:</b> {{ order.time|date:DATE_FORMAT }} {{ order.time|time:TIME_FORMAT }}
+        </p>
+        <p>
+          <b>{% trans 'Duration' %}:</b> {{ order.duration }} {% trans 'minutes' %}
+        </p>
+        <p>
+          <b>{% trans 'Status' %}:</b>
+          {% order_status_badge order %}
+        </p>
+        {% if order.voucher %}
+          <p>
+            <b>{% trans 'Voucher' %}:</b> {{ order.voucher.code }} ({{ order.voucher.discount_percent }}% off)
+          </p>
+        {% endif %}
+        <p>
+          <b>{% trans 'Created at' %}:</b> {{ order.created_at|date:DATE_FORMAT }} {{ order.created_at|time:TIME_FORMAT }}
+        </p>
+        {% if order.note %}
+          <p>
+            <b>{% trans 'Note' %}:</b> {{ order.note }}
+          </p>
+        {% endif %}
+        {% if order.cancel_reason %}
+          <p>
+            <b>{% trans 'Cancel reason' %}:</b> {{ order.cancel_reason }}
+          </p>
+        {% endif %}
+        <p>
+          <b>{% trans 'Total Price' %}:</b>
+          {% if total_price is not None %}
+            {{ total_price|floatformat:0|intcomma }} VND
+          {% else %}
+            <span class="text-muted">{% trans 'N/A' %}</span>
+          {% endif %}
+        </p>
+
+        {% if order.status == 'pending' %}
+          <!-- Accept Order Button -->
+          <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#acceptModal">{% trans 'Accept Order' %}</button>
+        {% endif %}
+        <a href="{% url 'all_orders' %}" class="btn btn-secondary mt-2">{% trans 'Back to list' %}</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accept Modal -->
+  <div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="acceptModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="{% url 'admin_accept_order' order.pk %}">
+          {% csrf_token %}
+          <div class="modal-header">
+            <h5 class="modal-title" id="acceptModalLabel">{% trans 'Accept Order' %}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans 'Close' %}"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              {% trans 'Are you sure you want to accept this order?' %}
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans 'Cancel' %}</button>
+            <button type="button" class="btn btn-success" id="btn-accept-order" data-accept-url="{% url 'admin_accept_order' order.pk %}" data-order-id="{{ order.pk }}">{% trans 'Yes, Accept' %}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script>
+    window.CSRF_TOKEN = '{{ csrf_token }}'
+  </script>
+  <script src="{% static 'js/accept_order.js' %}"></script>
+{% endblock %}

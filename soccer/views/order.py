@@ -9,6 +9,7 @@ from django.utils.translation import gettext as _
 from django.db import transaction
 from soccer.constants import DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT
 from soccer.decorators import admin_required
+from django.http import JsonResponse
 
 @login_required
 def order_field(request, pk):
@@ -65,7 +66,7 @@ def order_field(request, pk):
 def order_detail(request, pk):
     order = get_object_or_404(Order, pk=pk)
     if order.user != request.user:
-        return render(request, '403.html', status=403)
+        return render(request, 'soccer/403.html', status=403)
     base_price = order.soccer_field.price_per_hour * (Decimal(order.duration) / Decimal(60))
     discount = 0
     if order.voucher:
@@ -85,7 +86,7 @@ def my_orders(request):
 def order_edit(request, pk):
     order = get_object_or_404(Order, pk=pk, user=request.user)
     if order.status != OrderStatus.PENDING:
-        return render(request, '403.html', status=403)
+        return render(request, 'soccer/403.html', status=403)
     if request.method == "POST":
         form = OrderFieldForm(request.POST, instance=order)
         if form.is_valid():
@@ -175,3 +176,28 @@ def all_orders(request):
         'DATE_FORMAT': DATE_FORMAT,
         'TIME_FORMAT': TIME_FORMAT
     })
+
+@admin_required
+def admin_order_detail(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    return render(request, 'soccer/admin_order_detail.html', {
+        'order': order,
+        'total_price': None,
+        'DATE_FORMAT': DATE_FORMAT,
+        'TIME_FORMAT': TIME_FORMAT
+    })
+
+@admin_required
+def admin_accept_order(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    if request.method == "POST" and request.headers.get("x-requested-with") == "XMLHttpRequest":
+        if order.status != OrderStatus.PENDING:
+            return JsonResponse({"success": False, "error": _("Order is not pending.")})
+        order.status = OrderStatus.CONFIRMED
+        order.save()
+        return JsonResponse({
+            "success": True,
+            "new_status": order.status,
+            "new_status_display": order.get_status_display(),
+        })
+    return JsonResponse({"success": False, "error": _("Invalid request.")})
