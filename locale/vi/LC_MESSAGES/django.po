@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Soccer Fields Management 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-18 09:45+0700\n"
-"PO-Revision-Date: 2025-07-16 15:30+0700\n"
+"POT-Creation-Date: 2025-07-18 14:34+0700\n"
+"PO-Revision-Date: 2025-07-18 15:30+0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "Language: vi\n"
@@ -33,7 +33,7 @@ msgstr "Không hoạt động"
 msgid "Maintenance"
 msgstr "Bảo trì"
 
-#: soccer/enums.py:10 soccer/enums.py:21
+#: soccer/enums.py:10 soccer/enums.py:22
 msgid "Pending"
 msgstr "Đang chờ"
 
@@ -42,58 +42,62 @@ msgid "Confirmed"
 msgstr "Đã xác nhận"
 
 #: soccer/enums.py:12
-msgid "Cancelled"
-msgstr "Đã hủy"
+msgid "Cancelled by User"
+msgstr "Đã huỷ bởi người dùng"
 
 #: soccer/enums.py:13
+msgid "Cancelled by Admin"
+msgstr "Đã huỷ bởi quản trị viên"
+
+#: soccer/enums.py:14
 msgid "Completed"
 msgstr "Đã hoàn thành"
 
-#: soccer/enums.py:16
+#: soccer/enums.py:17
 msgid "Add Field"
 msgstr "Thêm sân"
 
-#: soccer/enums.py:17
+#: soccer/enums.py:18
 msgid "Update Field"
 msgstr "Cập nhật sân"
 
-#: soccer/enums.py:18
+#: soccer/enums.py:19
 msgid "Delete Field"
-msgstr "Xóa sân"
+msgstr "Xoá sân"
 
-#: soccer/enums.py:22
+#: soccer/enums.py:23
 msgid "Approved"
 msgstr "Đã duyệt"
 
-#: soccer/enums.py:23
+#: soccer/enums.py:24
 msgid "Rejected"
 msgstr "Từ chối"
 
-#: soccer/enums.py:26
+#: soccer/enums.py:27
 msgid "Indoor"
 msgstr "Trong nhà"
 
-#: soccer/enums.py:27
+#: soccer/enums.py:28
 msgid "Outdoor"
 msgstr "Ngoài trời"
 
-#: soccer/enums.py:30
+#: soccer/enums.py:31
 msgid "60 minutes"
 msgstr "60 phút"
 
-#: soccer/enums.py:31
+#: soccer/enums.py:32
 msgid "90 minutes"
 msgstr "90 phút"
 
-#: soccer/enums.py:32
+#: soccer/enums.py:33
 msgid "120 minutes"
 msgstr "120 phút"
 
-#: soccer/enums.py:33
+#: soccer/enums.py:34
 msgid "150 minutes"
 msgstr "150 phút"
 
-#: soccer/enums.py:34
+#: soccer/enums.py:35
 msgid "180 minutes"
 msgstr "180 phút"
 
@@ -131,26 +135,110 @@ msgstr "Bạn không có quyền truy cập trang này."
 msgid "Back to home page"
 msgstr "Về trang chủ"
 
+#: soccer/templates/soccer/admin_cancel_order_confirm.html:5
+#: soccer/templates/soccer/my_orders.html:46
+#: soccer/templates/soccer/order_cancel_confirm.html:7
+msgid "Are you sure you want to cancel this order?"
+msgstr "Bạn có chắc muốn huỷ đơn này không?"
+
+#: soccer/templates/soccer/admin_cancel_order_confirm.html:13
+#: soccer/templates/soccer/order_cancel_confirm.html:12
+#: soccer/templates/soccer/order_detail.html:42
+msgid "Cancellation reason"
+msgstr "Lý do huỷ đơn"
+
+#: soccer/templates/soccer/admin_cancel_order_confirm.html:19
+#: soccer/templates/soccer/order_cancel_confirm.html:18
+msgid "Cancel order"
+msgstr "Huỷ đơn"
+
+#: soccer/templates/soccer/admin_cancel_order_confirm.html:20
+#: soccer/templates/soccer/order_cancel_confirm.html:19
+#: soccer/templates/soccer/order_detail.html:61
+msgid "Back"
+msgstr "Quay lại"
+
+#: soccer/templates/soccer/all_orders.html:7
+msgid "All Orders"
+msgstr "Tất cả đơn đặt"
+
+#: soccer/templates/soccer/all_orders.html:13
+msgid "User"
+msgstr "Người dùng"
+
+#: soccer/templates/soccer/all_orders.html:16
+#: soccer/templates/soccer/my_orders.html:13
+msgid "Field"
+msgstr "Sân"
+
+#: soccer/templates/soccer/all_orders.html:19
+#: soccer/templates/soccer/my_orders.html:16
+msgid "Date"
+msgstr "Ngày"
+
+#: soccer/templates/soccer/all_orders.html:22
+#: soccer/templates/soccer/my_orders.html:19
+#: soccer/templates/soccer/order_detail.html:17
+#: soccer/templates/soccer/order_field.html:12
+msgid "Time"
+msgstr "Thời gian"
+
+#: soccer/templates/soccer/all_orders.html:25
+#: soccer/templates/soccer/my_orders.html:22
+msgid "Duration (min)"
+msgstr "Thời lượng (phút)"
+
+#: soccer/templates/soccer/all_orders.html:28
+#: soccer/templates/soccer/field_detail.html:31
+#: soccer/templates/soccer/my_orders.html:25
+#: soccer/templates/soccer/order_detail.html:23
+#: soccer/templates/soccer/voucher_list_admin.html:38
+#: soccer/templates/soccer/voucher_list_user.html:35
+msgid "Status"
+msgstr "Trạng thái"
+
+#: soccer/templates/soccer/all_orders.html:31
+#: soccer/templates/soccer/my_orders.html:28
+msgid "Action"
+msgstr "Thao tác"
+
+#: soccer/templates/soccer/all_orders.html:45
+#: soccer/templates/soccer/my_orders.html:41
+msgid "Detail"
+msgstr "Chi tiết"
+
+#: soccer/templates/soccer/all_orders.html:47
+#: soccer/templates/soccer/my_orders.html:46
+#: soccer/templates/soccer/voucher_delete.html:20
+#: soccer/templates/soccer/voucher_form.html:76
+msgid "Cancel"
+msgstr "Huỷ"
+
+#: soccer/templates/soccer/all_orders.html:56
+#: soccer/templates/soccer/my_orders.html:56
+msgid "No orders yet."
+msgstr "Chưa có đơn nào."
+
 #: soccer/templates/soccer/field_detail.html:16
 #: soccer/templates/soccer/home.html:35
-#: soccer/templates/soccer/order_detail.html:43
+#: soccer/templates/soccer/order_detail.html:51
 msgid "Type"
 msgstr "Loại sân"
 
 #: soccer/templates/soccer/field_detail.html:19
 #: soccer/templates/soccer/home.html:36
-#: soccer/templates/soccer/order_detail.html:40
+#: soccer/templates/soccer/order_detail.html:48
 msgid "Address"
 msgstr "Địa chỉ"
 
 #: soccer/templates/soccer/field_detail.html:22
 #: soccer/templates/soccer/home.html:37
-#: soccer/templates/soccer/order_detail.html:46
+#: soccer/templates/soccer/order_detail.html:54
 msgid "Phone"
 msgstr "Số điện thoại"
 
 #: soccer/templates/soccer/field_detail.html:25
-#: soccer/templates/soccer/order_detail.html:49
+#: soccer/templates/soccer/order_detail.html:57
 msgid "Email"
 msgstr "Email"
 
@@ -160,19 +248,11 @@ msgstr "Email"
 msgid "Price per hour"
 msgstr "Giá mỗi giờ"
 
-#: soccer/templates/soccer/field_detail.html:31
-#: soccer/templates/soccer/order_detail.html:23
-#: soccer/templates/soccer/voucher_list_admin.html:38
-#: soccer/templates/soccer/voucher_list_user.html:35
-msgid "Status"
-msgstr "Trạng thái"
-
 #: soccer/templates/soccer/field_detail.html:34
 msgid "Order this field"
 msgstr "Đặt sân này"
 
 #: soccer/templates/soccer/field_detail.html:35
-#: soccer/templates/soccer/order_detail.html:53
 msgid "Back to list"
 msgstr "Trở lại danh sách"
 
@@ -196,14 +276,18 @@ msgstr "Lọc"
 msgid "No soccer fields found."
 msgstr "Không tìm thấy sân bóng nào."
 
+#: soccer/templates/soccer/my_orders.html:7
+msgid "My Orders"
+msgstr "Đơn đã đặt"
+
+#: soccer/templates/soccer/my_orders.html:43
+#: soccer/templates/soccer/voucher_list_admin.html:85
+msgid "Edit"
+msgstr "Sửa"
+
 #: soccer/templates/soccer/order_detail.html:11
 msgid "Order Details"
 msgstr "Chi tiết đơn đặt"
-
-#: soccer/templates/soccer/order_detail.html:17
-#: soccer/templates/soccer/order_field.html:12
-msgid "Time"
-msgstr "Thời gian"
 
 #: soccer/templates/soccer/order_detail.html:20
 #: soccer/templates/soccer/order_field.html:55
@@ -278,17 +362,12 @@ msgstr "Bạn có chắc muốn xóa voucher này không?"
 
 #: soccer/templates/soccer/voucher_delete.html:16
 msgid "Delete effective at"
-msgstr "Thời điểm bắt đầu xóa"
+msgstr "Thời điểm bắt đầu xoá"
 
 #: soccer/templates/soccer/voucher_delete.html:19
 #: soccer/templates/soccer/voucher_list_admin.html:86
 msgid "Delete"
-msgstr "Xóa"
-
-#: soccer/templates/soccer/voucher_delete.html:20
-#: soccer/templates/soccer/voucher_form.html:76
-msgid "Cancel"
-msgstr "Hủy"
+msgstr "Xoá"
 
 #: soccer/templates/soccer/voucher_form.html:13
 #: soccer/templates/soccer/voucher_list_admin.html:17
@@ -322,20 +401,16 @@ msgstr "Thao tác"
 
 #: soccer/templates/soccer/voucher_list_admin.html:44
 msgid "Deleted at"
-msgstr "Thời điểm xóa"
+msgstr "Thời điểm xoá"
 
 #: soccer/templates/soccer/voucher_list_admin.html:77
 msgid "Deleted"
-msgstr "Đã xóa"
+msgstr "Đã xoá"
 
 #: soccer/templates/soccer/voucher_list_admin.html:79
 #: soccer/templates/soccer/voucher_list_user.html:54
 msgid "Expired"
 msgstr "Hết hạn"
-
-#: soccer/templates/soccer/voucher_list_admin.html:85
-msgid "Edit"
-msgstr "Sửa"
 
 #: soccer/templates/soccer/voucher_list_admin.html:99
 #: soccer/templates/soccer/voucher_list_user.html:65
@@ -358,9 +433,13 @@ msgstr "Còn dùng được"
 msgid "Account activation confirmation"
 msgstr "Xác nhận kích hoạt tài khoản"
 
-#: soccer/views/order.py:39
+#: soccer/views/order.py:40
 msgid "This time slot has already been booked. Please select another time."
 msgstr "Khung giờ này đã có người đặt. Vui lòng chọn thời gian khác."
+
+#: soccer/views/order.py:115 soccer/views/order.py:146
+msgid "Please provide a reason for cancellation."
+msgstr "Vui lòng nhập lý do huỷ đơn."
 
 #: soccer/views/voucher.py:52
 msgid "Edit Voucher"
@@ -368,7 +447,7 @@ msgstr "Sửa voucher"
 
 #: soccer/views/voucher.py:60
 msgid "Voucher already deleted."
-msgstr "Voucher đã bị xóa."
+msgstr "Voucher đã bị xoá."
 
 #: soccer/views/voucher.py:76
 msgid "Invalid date/time."
@@ -376,7 +455,7 @@ msgstr "Ngày/giờ không hợp lệ."
 
 #: soccer/views/voucher.py:82
 msgid "Delete time required."
-msgstr "Cần chọn thời điểm xóa."
+msgstr "Cần chọn thời điểm xoá."
 
 #: templates/activation/activation_email.html:2
 #, python-format

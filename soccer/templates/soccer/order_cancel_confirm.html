@@ -1,0 +1,23 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container py-4 max-w-480">
+    <div class="alert alert-danger text-center">
+      <h4>{% trans 'Are you sure you want to cancel this order?' %}</h4>
+      <p class="fw-bold">{{ order.soccer_field.name }} - {{ order.time|date:DATE_TIME_FORMAT }}</p>
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="cancel_reason" class="form-label">{% trans 'Cancellation reason' %}:</label>
+          <textarea id="cancel_reason" name="cancel_reason" class="form-control" rows="3" required>{{ request.POST.cancel_reason }}</textarea>
+          {% if error_message %}
+            <div class="text-danger small mt-2">{{ error_message }}</div>
+          {% endif %}
+        </div>
+        <button class="btn btn-danger">{% trans 'Cancel order' %}</button>
+        <a href="{% url 'my_orders' %}" class="btn btn-secondary ms-2">{% trans 'Back' %}</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}

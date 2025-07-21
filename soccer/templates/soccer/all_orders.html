@@ -1,0 +1,60 @@
+{% extends 'base_generic.html' %}
+{% load humanize %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container py-4 max-w-720">
+    <h3 class="mb-4 text-center">{% trans 'All Orders' %}</h3>
+    {% if orders %}
+      <table class="table table-bordered align-middle">
+        <thead>
+          <tr>
+            <th>
+              {% trans 'User' %}
+            </th>
+            <th>
+              {% trans 'Field' %}
+            </th>
+            <th>
+              {% trans 'Date' %}
+            </th>
+            <th>
+              {% trans 'Time' %}
+            </th>
+            <th>
+              {% trans 'Duration (min)' %}
+            </th>
+            <th>
+              {% trans 'Status' %}
+            </th>
+            <th>
+              {% trans 'Action' %}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td>{{ order.user.get_full_name|default:order.user.username }}</td>
+              <td>{{ order.soccer_field.name }}</td>
+              <td>{{ order.time|date:DATE_FORMAT }}</td>
+              <td>{{ order.time|time:TIME_FORMAT }}</td>
+              <td>{{ order.duration }}</td>
+              <td>{{ order.get_status_display }}</td>
+              <td>
+                <a href="{% url 'order_detail' order.pk %}" class="btn btn-sm btn-info">{% trans 'Detail' %}</a>
+                {% if order.status == OrderStatus.PENDING or order.status == OrderStatus.CONFIRMED %}
+                  <a href="{% url 'admin_cancel_order' order.pk %}" class="btn btn-sm btn-danger">{% trans 'Cancel' %}</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="text-center">
+        {% trans 'No orders yet.' %}
+      </p>
+    {% endif %}
+  </div>
+{% endblock %}

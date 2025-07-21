@@ -36,6 +36,14 @@
                 </li>
               {% endif %}
             </ul>
+            {% if order.status == all_statuses.CANCELLED_BY_USER or order.status == all_statuses.CANCELLED_BY_ADMIN %}
+              {% if order.cancel_reason %}
+                <div class="alert alert-warning mt-3 mb-0">
+                  <b>{% trans 'Cancellation reason' %}:</b>
+                  <span>{{ order.cancel_reason }}</span>
+                </div>
+              {% endif %}
+            {% endif %}
             <div class="mb-2">
               <b>{% trans 'Address' %}:</b> {{ order.soccer_field.address }}
             </div>
@@ -50,7 +58,7 @@
             </div>
           </div>
           <div class="card-footer text-end">
-            <a href="{% url 'soccer_home' %}" class="btn btn-secondary">{% trans 'Back to list' %}</a>
+            <a href="javascript:history.back()" class="btn btn-secondary">{% trans 'Back' %}</a>
           </div>
         </div>
       </div>
