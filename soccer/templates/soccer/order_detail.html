@@ -59,6 +59,9 @@
           </div>
           <div class="card-footer text-end">
             <a href="javascript:history.back()" class="btn btn-secondary">{% trans 'Back' %}</a>
+            {% if order.status == all_statuses.COMPLETED %}
+              <a href="{% url 'order_field' order.soccer_field.pk %}" class="btn btn-primary">{% trans 'Order again' %}</a>
+            {% endif %}
           </div>
         </div>
       </div>

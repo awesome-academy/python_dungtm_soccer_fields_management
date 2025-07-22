@@ -148,3 +148,7 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "your_email@example.com")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "your_email_password")
 
 LOGIN_REDIRECT_URL = "soccer_home"
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_TIMEZONE = 'Asia/Ho_Chi_Minh'
