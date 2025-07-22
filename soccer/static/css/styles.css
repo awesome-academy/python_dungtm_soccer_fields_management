@@ -31,3 +31,17 @@ body {
 .max-w-600 {
   max-width: 600px;
 }
+
+.star-rating label { 
+  margin: 0 3px; 
+}
+
+.star-rating input:checked ~ label span,
+.star-rating label:hover ~ label span,
+.star-rating input:focus ~ label span {
+  color: #ffc107 !important;
+}
+
+.star-rating label span { 
+  transition: color 0.2s; 
+}

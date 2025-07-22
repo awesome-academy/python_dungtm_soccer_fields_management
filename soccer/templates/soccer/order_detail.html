@@ -58,9 +58,32 @@
             </div>
           </div>
           <div class="card-footer text-end">
-            <a href="javascript:history.back()" class="btn btn-secondary">{% trans 'Back' %}</a>
-            {% if order.status == all_statuses.COMPLETED %}
-              <a href="{% url 'order_field' order.soccer_field.pk %}" class="btn btn-primary">{% trans 'Order again' %}</a>
+            <div class="row justify-content-end align-items-center gap-2">
+              <a href="javascript:history.back()" class="btn btn-secondary mr-1"><i class="bi bi-arrow-left mr-1"></i>{% trans 'Back' %}</a>
+
+              {% if order.status == all_statuses.COMPLETED %}
+                <a href="{% url 'order_field' order.soccer_field.pk %}" class="btn btn-primary mr-1"><i class="bi bi-repeat mr-1"></i>{% trans 'Order again' %}</a>
+
+                {% if review %}
+                  <a href="{% url 'edit_review' order.soccer_field.pk %}" class="btn btn-warning"><i class="bi bi-pencil mr-1"></i>{% trans 'Edit review' %}</a>
+                {% else %}
+                  <a href="{% url 'review_field' order.soccer_field.pk %}" class="btn btn-success"><i class="bi bi-star mr-1"></i>{% trans 'Review field' %}</a>
+                {% endif %}
+              {% endif %}
+            </div>
+
+            {% if order.status == all_statuses.COMPLETED and review %}
+              <div class="mt-3">
+                <span class="fw-bold">{% trans 'Your review:' %}</span>
+                <div>
+                  {% if review.rate %}
+                    <span class="badge bg-warning text-dark"><i class="bi bi-star"></i> {{ review.rate|floatformat:1 }}/5</span>
+                  {% endif %}
+                  {% if review.comment %}
+                    <p class="mt-2">{{ review.comment }}</p>
+                  {% endif %}
+                </div>
+              </div>
             {% endif %}
           </div>
         </div>

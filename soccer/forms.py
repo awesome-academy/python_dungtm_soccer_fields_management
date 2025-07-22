@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from soccer.models import Order, Voucher
+from soccer.constants import MAX_LENGTH_1000, MIN_VALUE_1, MAX_VALUE_5
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, label="Email")
@@ -54,3 +55,7 @@ class VoucherForm(forms.ModelForm):
             'valid_from': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
             'valid_to': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
         }
+
+class ReviewForm(forms.Form):
+    rate = forms.IntegerField(min_value=MIN_VALUE_1, max_value=MAX_VALUE_5, label=_("Rate"),)
+    comment = forms.CharField(widget=forms.Textarea, label=_("Comment"), max_length=MAX_LENGTH_1000, required=False)

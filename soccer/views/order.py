@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from soccer.forms import OrderFieldForm
-from soccer.models import SoccerField, Order, Voucher
+from soccer.forms import OrderFieldForm, ReviewForm
+from soccer.models import SoccerField, Order, Voucher, Review
 from soccer.enums import OrderStatus
 from decimal import Decimal
 from datetime import timedelta
@@ -10,6 +10,8 @@ from django.db import transaction
 from soccer.constants import DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT
 from soccer.decorators import admin_required
 from django.http import JsonResponse
+from soccer.utils import user_can_review_field
+from soccer.utils import user_can_review_field
 
 @login_required
 def order_field(request, pk):
@@ -68,6 +70,8 @@ def order_detail(request, pk):
     if order.user != request.user:
         return render(request, 'soccer/403.html', status=403)
     base_price = order.soccer_field.price_per_hour * (Decimal(order.duration) / Decimal(60))
+    review = Review.objects.filter(user=request.user, soccer_field=order.soccer_field).first()
+    review = Review.objects.filter(user=request.user, soccer_field=order.soccer_field).first()
     discount = 0
     if order.voucher:
         if base_price >= order.voucher.min_price:
@@ -75,7 +79,18 @@ def order_detail(request, pk):
             if discount > order.voucher.max_discount_amount:
                 discount = order.voucher.max_discount_amount
     total_price = max(0, base_price - discount)
-    return render(request, 'soccer/order_detail.html', {'order': order, 'total_price': total_price, "all_statuses": OrderStatus})
+    return render(request, 'soccer/order_detail.html', {
+        "order": order,
+        "total_price": total_price,
+        "review": review,
+        "all_statuses": OrderStatus,
+    })
+    return render(request, 'soccer/order_detail.html', {
+        "order": order,
+        "total_price": total_price,
+        "review": review,
+        "all_statuses": OrderStatus,
+    })
 
 @login_required
 def my_orders(request):
@@ -201,3 +216,69 @@ def admin_accept_order(request, pk):
             "new_status_display": order.get_status_display(),
         })
     return JsonResponse({"success": False, "error": _("Invalid request.")})
+
+def render_no_permission_review(request, soccer_field, edit=False):
+    ctx = {
+        "soccer_field": soccer_field,
+        "form": None,
+        "error": _("You have not completed any orders for this field."),
+    }
+    if edit:
+        ctx["edit"] = True
+    return render(request, "soccer/review_field.html", ctx)
+
+@login_required
+def review_field(request, pk):
+    soccer_field = get_object_or_404(SoccerField, pk=pk)
+    if not user_can_review_field(request.user, soccer_field):
+        return render_no_permission_review(request, soccer_field)
+
+    try:
+        review = Review.objects.get(user=request.user, soccer_field=soccer_field)
+        return redirect('edit_review', pk=pk)
+    except Review.DoesNotExist:
+        pass
+
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            Review.objects.create(
+                soccer_field=soccer_field,
+                user=request.user,
+                rate=form.cleaned_data["rate"],
+                comment=form.cleaned_data["comment"]
+            )
+            return redirect('soccer_field_detail', pk=soccer_field.pk)
+    else:
+        form = ReviewForm()
+
+    return render(request, "soccer/review_field.html", {
+        "soccer_field": soccer_field,
+        "form": form,
+    })
+
+@login_required
+def edit_review(request, pk):
+    soccer_field = get_object_or_404(SoccerField, pk=pk)
+    if not user_can_review_field(request.user, soccer_field):
+        return render_no_permission_review(request, soccer_field, edit=True)
+
+    review = get_object_or_404(Review, user=request.user, soccer_field=soccer_field)
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review.rate = form.cleaned_data["rate"]
+            review.comment = form.cleaned_data["comment"]
+            review.save()
+            return redirect('soccer_field_detail', pk=soccer_field.pk)
+    else:
+        form = ReviewForm(initial={
+            "rate": review.rate,
+            "comment": review.comment,
+        })
+
+    return render(request, "soccer/review_field.html", {
+        "soccer_field": soccer_field,
+        "form": form,
+        "edit": True,
+    })
