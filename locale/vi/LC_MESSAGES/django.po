@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Soccer Fields Management 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-22 09:53+0700\n"
+"POT-Creation-Date: 2025-07-22 14:43+0700\n"
 "PO-Revision-Date: 2025-07-18 15:30+0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -111,12 +111,20 @@ msgstr "Thời gian đặt"
 msgid "Note"
 msgstr "Ghi chú"
 
+#: soccer/forms.py:59
+msgid "Rate"
+msgstr "Đánh giá"
+
+#: soccer/forms.py:60
+msgid "Comment"
+msgstr "Bình luận"
+
 #: soccer/templates/auth_generic.html:6 soccer/templates/base_generic.html:6
-#: soccer/templates/base_generic.html:18
+#: soccer/templates/base_generic.html:19
 msgid "Soccer Fields Management"
 msgstr "Quản lý sân bóng"
 
-#: soccer/templates/base_generic.html:27
+#: soccer/templates/base_generic.html:28
 msgid "Logout"
 msgstr "Đăng xuất"
 
@@ -155,7 +163,7 @@ msgstr "Huỷ đơn"
 
 #: soccer/templates/soccer/admin_cancel_order_confirm.html:20
 #: soccer/templates/soccer/order_cancel_confirm.html:19
-#: soccer/templates/soccer/order_detail.html:61
+#: soccer/templates/soccer/order_detail.html:62
 msgid "Back"
 msgstr "Quay lại"
 
@@ -258,6 +266,7 @@ msgstr "Bạn có chắc muốn huỷ đơn này không?"
 #: soccer/templates/soccer/admin_order_detail.html:80
 #: soccer/templates/soccer/all_orders.html:47
 #: soccer/templates/soccer/my_orders.html:46
+#: soccer/templates/soccer/review_field.html:38
 #: soccer/templates/soccer/voucher_delete.html:20
 #: soccer/templates/soccer/voucher_form.html:76
 msgid "Cancel"
@@ -362,11 +371,23 @@ msgstr "Sửa"
 msgid "Order Details"
 msgstr "Chi tiết đơn đặt"
 
-#: soccer/templates/soccer/order_detail.html:63
+#: soccer/templates/soccer/order_detail.html:65
 #, fuzzy
 #| msgid "Order Details"
 msgid "Order again"
 msgstr "Đặt lại"
+
+#: soccer/templates/soccer/order_detail.html:68
+msgid "Edit review"
+msgstr "Sửa đánh giá"
+
+#: soccer/templates/soccer/order_detail.html:70
+msgid "Review field"
+msgstr "Đánh giá sân"
+
+#: soccer/templates/soccer/order_detail.html:77
+msgid "Your review:"
+msgstr "Đánh giá của bạn:"
 
 #: soccer/templates/soccer/order_field.html:8
 msgid "Order Soccer Field"
@@ -420,6 +441,34 @@ msgstr "Số lượng còn lại"
 #: soccer/templates/soccer/order_field.html:61
 msgid "Order"
 msgstr "Đặt"
+
+#: soccer/templates/soccer/review_field.html:8
+#, fuzzy
+#| msgid "Back to home page"
+msgid "Back to my orders"
+msgstr "Về trang chủ"
+
+#: soccer/templates/soccer/review_field.html:13
+#, fuzzy
+#| msgid "Order Soccer Field"
+msgid "Review Soccer Field"
+msgstr "Đặt sân bóng"
+
+#: soccer/templates/soccer/review_field.html:17
+msgid "Rating (1-5 stars)"
+msgstr "Đánh giá (1-5 sao)"
+
+#: soccer/templates/soccer/review_field.html:31
+msgid "Your Comment"
+msgstr "Bình luận của bạn"
+
+#: soccer/templates/soccer/review_field.html:32
+msgid "Enter your comment here..."
+msgstr "Nhập bình luận của bạn..."
+
+#: soccer/templates/soccer/review_field.html:37
+msgid "Submit review"
+msgstr "Gửi đánh giá"
 
 #: soccer/templates/soccer/voucher_delete.html:8
 msgid "Are you sure you want to delete this voucher?"
@@ -494,37 +543,41 @@ msgstr "Hết lượt sử dụng"
 msgid "Available"
 msgstr "Còn dùng được"
 
-#: soccer/utils.py:12
+#: soccer/utils.py:13
 msgid "Account activation confirmation"
 msgstr "Xác nhận kích hoạt tài khoản"
 
-#: soccer/views/order.py:41
+#: soccer/views/order.py:42
 msgid "This time slot has already been booked. Please select another time."
 msgstr "Khung giờ này đã có người đặt. Vui lòng chọn thời gian khác."
 
-#: soccer/views/order.py:113
+#: soccer/views/order.py:120
 msgid ""
 "You cannot cancel this order because it has already been processed or "
 "cancelled."
 msgstr "Bạn không thể huỷ đơn này vì đơn đã được xử lý hoặc đã bị huỷ."
 
-#: soccer/views/order.py:122 soccer/views/order.py:154
+#: soccer/views/order.py:129 soccer/views/order.py:161
 msgid "Please provide a reason for cancellation."
 msgstr "Vui lòng nhập lý do huỷ đơn."
 
-#: soccer/views/order.py:144
+#: soccer/views/order.py:151
 msgid ""
 "This order cannot be cancelled because it has already been processed or "
 "cancelled."
 msgstr "Đơn này không thể huỷ vì đã được xử lý hoặc đã bị huỷ."
 
-#: soccer/views/order.py:195
+#: soccer/views/order.py:202
 msgid "Order is not pending."
 msgstr "Đơn không ở trạng thái chờ."
 
-#: soccer/views/order.py:203
+#: soccer/views/order.py:210
 msgid "Invalid request."
 msgstr "Yêu cầu không hợp lệ."
+
+#: soccer/views/order.py:216
+msgid "You have not completed any orders for this field."
+msgstr "Bạn chưa đặt sân này bao giờ."
 
 #: soccer/views/voucher.py:52
 msgid "Edit Voucher"

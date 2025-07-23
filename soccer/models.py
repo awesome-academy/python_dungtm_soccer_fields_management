@@ -72,20 +72,15 @@ class Order(models.Model):
     def end_time(self):
         return self.time + timedelta(minutes=self.duration)
 
-class Rating(models.Model):
+class Review(models.Model):
     soccer_field = models.ForeignKey(SoccerField, on_delete=models.CASCADE)
-    rate = models.PositiveSmallIntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rate = models.PositiveSmallIntegerField()
+    comment = models.TextField(blank=True)  # có thể cho phép không comment, nhưng thường nên bắt buộc
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ('soccer_field', 'user')
-
-class Comment(models.Model):
-    soccer_field = models.ForeignKey(SoccerField, on_delete=models.CASCADE)
-    comment = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
 
 class FieldRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

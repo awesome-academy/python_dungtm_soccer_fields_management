@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SoccerField, Voucher, Order, Rating, Comment, FieldRequest
+from .models import SoccerField, Voucher, Order, Review, FieldRequest
 
 @admin.register(SoccerField)
 class SoccerFieldAdmin(admin.ModelAdmin):
@@ -23,17 +23,11 @@ class OrderAdmin(admin.ModelAdmin):
     date_hierarchy = 'time'
     ordering = ('-created_at',)
 
-@admin.register(Rating)
+@admin.register(Review)
 class RatingAdmin(admin.ModelAdmin):
-    list_display = ('id', 'soccer_field', 'user', 'rate', 'created_at')
+    list_display = ('id', 'soccer_field', 'user', 'rate', 'comment', 'created_at')
     list_filter = ('soccer_field', 'rate')
     search_fields = ('soccer_field__name', 'user__username')
-
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'soccer_field', 'user', 'created_at')
-    list_filter = ('soccer_field',)
-    search_fields = ('comment', 'user__username', 'soccer_field__name')
 
 @admin.register(FieldRequest)
 class FieldRequestAdmin(admin.ModelAdmin):
