@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container py-4">
+    <h3>{% trans 'Cancel Request' %}</h3>
+    <div class="alert alert-warning">
+      {% trans 'Are you sure you want to cancel this request?' %}
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">{% trans 'Cancel request' %}</button>
+      <a href="{% url 'my_field_requests' %}" class="btn btn-secondary">{% trans 'Back' %}</a>
+    </form>
+  </div>
+{% endblock %}

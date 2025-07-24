@@ -18,6 +18,7 @@ from soccer.constants import (
     DECIMAL_PLACES    
 )
 from datetime import timedelta
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class SoccerField(models.Model):
@@ -34,6 +35,7 @@ class SoccerField(models.Model):
         default=SoccerFieldStatus.ACTIVE
     )
     description = models.TextField(blank=True, null=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -93,6 +95,31 @@ class FieldRequest(models.Model):
         choices=RequestStatus.choices,
         default=RequestStatus.PENDING
     )
+    soccer_field = models.ForeignKey(
+        SoccerField, on_delete=models.SET_NULL, blank=True, null=True,
+        help_text=_("The soccer field this request is related to.")
+    )
+    name = models.CharField(max_length=MAX_LENGTH_128, blank=True, null=True)
+    address = models.CharField(max_length=MAX_LENGTH_256, blank=True, null=True)
+    phone = models.CharField(max_length=MAX_LENGTH_32, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    type_field = models.CharField(
+        choices=SoccerFieldType.choices, blank=True, null=True, max_length=MAX_LENGTH_16
+    )
+    image = models.ImageField(upload_to='fields/requests/', blank=True, null=True)
+    price_per_hour = models.DecimalField(
+        max_digits=MAX_DIGITS, decimal_places=DECIMAL_PLACES, blank=True, null=True
+    )
+    description = models.TextField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def is_create(self):
+        return self.type == RequestType.ADD
+
+    def is_update(self):
+        return self.type == RequestType.UPDATE
+
+    def is_delete(self):
+        return self.type == RequestType.DELETE

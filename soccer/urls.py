@@ -20,4 +20,12 @@ urlpatterns = [
     path('admin/order/<int:pk>/', views.admin_order_detail, name='admin_order_detail'),
     path('field/<int:pk>/review/', views.review_field, name='review_field'),
     path('field/<int:pk>/review/edit/', views.edit_review, name='edit_review'),
+    path('field-requests/', views.my_field_requests, name='my_field_requests'),
+    path('field-requests/create/', views.create_field_request, name='create_field_request'),
+    path('field-requests/<int:pk>/', views.field_request_detail, name='field_request_detail'),
+    path('field-requests/<int:pk>/edit/', views.edit_field_request, name='edit_field_request'),
+    path('field-requests/<int:pk>/cancel/', views.cancel_field_request, name='cancel_field_request'),
+    path('admin/field-requests/', views.admin_field_requests, name='admin_field_requests'),
+    path('admin/field-requests/<int:pk>/', views.admin_field_request_detail, name='admin_field_request_detail'),
+    path('admin/field-requests/<int:pk>/status/', views.admin_update_field_request_status, name='admin_update_field_request_status'),
 ]

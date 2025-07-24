@@ -1,0 +1,65 @@
+{% extends 'base_generic.html' %}
+{% load field_request_extras %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3>{% trans 'My Requests' %}</h3>
+      <a href="{% url 'create_field_request' %}" class="btn btn-primary"><i class="me-1 bi bi-plus"></i>{% trans 'Create Request' %}</a>
+    </div>
+
+    <table class="table table-striped align-middle table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>
+            {% trans 'Type' %}
+          </th>
+          <th>
+            {% trans 'Field' %}
+          </th>
+          <th>
+            {% trans 'Status' %}
+          </th>
+          <th>
+            {% trans 'Created At' %}
+          </th>
+          <th class="text-end">
+            {% trans 'Actions' %}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in requests %}
+          <tr>
+            <td>{{ r.get_type_display }}</td>
+            <td>
+              {% if r.soccer_field %}
+                {{ r.soccer_field.name }}
+              {% else %}
+                <i>{% trans 'N/A' %}</i>
+              {% endif %}
+            </td>
+            <td>
+              {% field_request_status_badge r %}
+            </td>
+            <td>{{ r.created_at|date:DATE_TIME_FORMAT }}</td>
+            <td class="text-end">
+              <a href="{% url 'field_request_detail' r.pk %}" class="btn btn-sm btn-info"><i class="me-1 bi bi-eye"></i>{% trans 'Detail' %}</a>
+              {% if r.status == 'pending' %}
+                <a href="{% url 'edit_field_request' r.pk %}" class="btn btn-sm btn-warning"><i class="me-1 bi bi-pencil"></i>{% trans 'Edit' %}</a>
+                <a href="{% url 'cancel_field_request' r.pk %}" class="btn btn-sm btn-danger"><i class="me-1 bi bi-x"></i>{% trans 'Cancel' %}</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5" class="text-center text-muted">
+              {% trans 'You have not submitted any requests yet.' %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
