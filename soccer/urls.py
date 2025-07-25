@@ -28,4 +28,8 @@ urlpatterns = [
     path('admin/field-requests/', views.admin_field_requests, name='admin_field_requests'),
     path('admin/field-requests/<int:pk>/', views.admin_field_request_detail, name='admin_field_request_detail'),
     path('admin/field-requests/<int:pk>/status/', views.admin_update_field_request_status, name='admin_update_field_request_status'),
+    path('admin/fields/', views.admin_all_fields, name='admin_all_fields'),
+    path('admin/fields/add/', views.admin_add_field, name='admin_add_field'),
+    path('admin/fields/<int:pk>/', views.admin_field_detail, name='admin_field_detail'),
+    path('admin/fields/<int:pk>/edit/', views.admin_edit_field, name='admin_edit_field'),
 ]

@@ -1,0 +1,31 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="container py-4 max-w-700">
+    <h3 class="mb-4 text-center">
+      {% if field %}
+        {% trans 'Edit Soccer Field' %}
+      {% else %}
+        {% trans 'Add Soccer Field' %}
+      {% endif %}
+    </h3>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field_item in form %}
+        <div class="mb-3">
+          <label><b>{{ field_item.label }}</b></label>
+          {{ field_item|add_class:'form-control' }}
+          {% if field_item.errors %}
+            <div class="text-danger small">{{ field_item.errors }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <div class="mb-3 text-end">
+        <button class="btn btn-success">{% trans 'Save' %}</button>
+        <a href="{% url 'admin_all_fields' %}" class="btn btn-secondary">{% trans 'Cancel' %}</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

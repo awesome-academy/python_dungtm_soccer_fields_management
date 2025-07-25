@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Soccer Fields Management 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-24 16:37+0700\n"
+"POT-Creation-Date: 2025-07-25 11:51+0700\n"
 "PO-Revision-Date: 2025-07-18 15:30+0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -115,7 +115,7 @@ msgstr "Thời gian đặt"
 #: soccer/templates/soccer/admin_field_request_detail.html:90
 #: soccer/templates/soccer/admin_field_requests.html:29
 #: soccer/templates/soccer/admin_order_detail.html:38
-#: soccer/templates/soccer/field_request_detail.html:20
+#: soccer/templates/soccer/field_request_detail.html:21
 #: soccer/templates/soccer/field_request_form.html:95
 #: soccer/templates/soccer/order_detail.html:35
 #: soccer/templates/soccer/order_field.html:26
@@ -167,6 +167,135 @@ msgstr "Bạn không có quyền truy cập trang này."
 msgid "Back to home page"
 msgstr "Về trang chủ"
 
+#: soccer/templates/soccer/admin_all_fields.html:9
+#, fuzzy
+#| msgid "Soccer Fields"
+msgid "All Soccer Fields"
+msgstr "Sân bóng"
+
+#: soccer/templates/soccer/admin_all_fields.html:11
+#: soccer/templates/soccer/admin_field_form.html:11
+#, fuzzy
+#| msgid "Soccer Fields"
+msgid "Add Soccer Field"
+msgstr "Sân bóng"
+
+#: soccer/templates/soccer/admin_all_fields.html:18
+#: soccer/templates/soccer/admin_field_detail.html:11
+#: soccer/templates/soccer/admin_field_request_detail.html:38
+#: soccer/templates/soccer/field_request_detail.html:40
+#: soccer/templates/soccer/field_request_form.html:37
+msgid "Name"
+msgstr "Tên"
+
+#: soccer/templates/soccer/admin_all_fields.html:19
+#: soccer/templates/soccer/admin_field_detail.html:14
+#: soccer/templates/soccer/admin_field_request_detail.html:18
+#: soccer/templates/soccer/admin_field_requests.html:27
+#: soccer/templates/soccer/field_detail.html:16
+#: soccer/templates/soccer/field_request_detail.html:15
+#: soccer/templates/soccer/field_request_form.html:20
+#: soccer/templates/soccer/home.html:35
+#: soccer/templates/soccer/my_field_requests.html:16
+#: soccer/templates/soccer/order_detail.html:51
+msgid "Type"
+msgstr "Loại sân"
+
+#: soccer/templates/soccer/admin_all_fields.html:20
+#: soccer/templates/soccer/admin_field_detail.html:17
+#: soccer/templates/soccer/admin_field_request_detail.html:44
+#: soccer/templates/soccer/field_detail.html:19
+#: soccer/templates/soccer/field_request_detail.html:43
+#: soccer/templates/soccer/field_request_form.html:44
+#: soccer/templates/soccer/home.html:36
+#: soccer/templates/soccer/order_detail.html:48
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: soccer/templates/soccer/admin_all_fields.html:21
+#: soccer/templates/soccer/admin_field_detail.html:20
+#: soccer/templates/soccer/admin_field_request_detail.html:50
+#: soccer/templates/soccer/field_detail.html:22
+#: soccer/templates/soccer/field_request_detail.html:46
+#: soccer/templates/soccer/field_request_form.html:51
+#: soccer/templates/soccer/home.html:37
+#: soccer/templates/soccer/order_detail.html:54
+msgid "Phone"
+msgstr "Số điện thoại"
+
+#: soccer/templates/soccer/admin_all_fields.html:22
+#: soccer/templates/soccer/admin_field_detail.html:23
+#: soccer/templates/soccer/admin_field_request_detail.html:56
+#: soccer/templates/soccer/field_detail.html:25
+#: soccer/templates/soccer/field_request_detail.html:49
+#: soccer/templates/soccer/field_request_form.html:58
+#: soccer/templates/soccer/order_detail.html:57
+msgid "Email"
+msgstr "Email"
+
+#: soccer/templates/soccer/admin_all_fields.html:23
+#, fuzzy
+#| msgid "Price per hour"
+msgid "Price/hour"
+msgstr "Giá mỗi giờ"
+
+#: soccer/templates/soccer/admin_all_fields.html:24
+#: soccer/templates/soccer/admin_field_detail.html:29
+#: soccer/templates/soccer/admin_field_request_detail.html:24
+#: soccer/templates/soccer/admin_field_requests.html:28
+#: soccer/templates/soccer/admin_order_detail.html:25
+#: soccer/templates/soccer/all_orders.html:28
+#: soccer/templates/soccer/field_detail.html:31
+#: soccer/templates/soccer/field_request_detail.html:18
+#: soccer/templates/soccer/my_field_requests.html:22
+#: soccer/templates/soccer/my_orders.html:25
+#: soccer/templates/soccer/order_detail.html:23
+#: soccer/templates/soccer/voucher_list_admin.html:38
+#: soccer/templates/soccer/voucher_list_user.html:35
+msgid "Status"
+msgstr "Trạng thái"
+
+#: soccer/templates/soccer/admin_all_fields.html:25
+#: soccer/templates/soccer/admin_field_detail.html:50
+#: soccer/templates/soccer/admin_field_request_detail.html:81
+#: soccer/templates/soccer/field_request_detail.html:62
+#: soccer/templates/soccer/field_request_form.html:79
+msgid "Image"
+msgstr "Ảnh"
+
+#: soccer/templates/soccer/admin_all_fields.html:26
+#: soccer/templates/soccer/my_field_requests.html:28
+#: soccer/templates/soccer/voucher_list_admin.html:41
+msgid "Actions"
+msgstr "Thao tác"
+
+#: soccer/templates/soccer/admin_all_fields.html:41
+#: soccer/templates/soccer/admin_field_detail.html:42
+#: soccer/templates/soccer/voucher_list_admin.html:77
+msgid "Deleted"
+msgstr "Đã xoá"
+
+#: soccer/templates/soccer/admin_all_fields.html:57
+#: soccer/templates/soccer/admin_field_requests.html:44
+#: soccer/templates/soccer/all_orders.html:45
+#: soccer/templates/soccer/my_field_requests.html:48
+#: soccer/templates/soccer/my_orders.html:41
+msgid "Detail"
+msgstr "Chi tiết"
+
+#: soccer/templates/soccer/admin_all_fields.html:60
+#: soccer/templates/soccer/admin_field_detail.html:57
+#: soccer/templates/soccer/my_field_requests.html:50
+#: soccer/templates/soccer/my_orders.html:43
+#: soccer/templates/soccer/voucher_list_admin.html:85
+msgid "Edit"
+msgstr "Sửa"
+
+#: soccer/templates/soccer/admin_all_fields.html:67
+#: soccer/templates/soccer/home.html:47
+msgid "No soccer fields found."
+msgstr "Không tìm thấy sân bóng nào."
+
 #: soccer/templates/soccer/admin_cancel_order_confirm.html:5
 #: soccer/templates/soccer/my_orders.html:46
 #: soccer/templates/soccer/order_cancel_confirm.html:7
@@ -185,15 +314,66 @@ msgid "Cancel order"
 msgstr "Huỷ đơn"
 
 #: soccer/templates/soccer/admin_cancel_order_confirm.html:20
+#: soccer/templates/soccer/admin_field_detail.html:56
 #: soccer/templates/soccer/cancel_field_request.html:13
-#: soccer/templates/soccer/field_request_detail.html:69
+#: soccer/templates/soccer/field_request_detail.html:70
 #: soccer/templates/soccer/order_cancel_confirm.html:19
 #: soccer/templates/soccer/order_detail.html:62
 msgid "Back"
 msgstr "Quay lại"
 
+#: soccer/templates/soccer/admin_field_detail.html:8
+#, fuzzy
+#| msgid "Order Details"
+msgid "Field Detail"
+msgstr "Chi tiết đơn đặt"
+
+#: soccer/templates/soccer/admin_field_detail.html:26
+#: soccer/templates/soccer/admin_field_request_detail.html:68
+#: soccer/templates/soccer/field_request_detail.html:55
+#: soccer/templates/soccer/field_request_form.html:72
+#, fuzzy
+#| msgid "Price per hour"
+msgid "Price per Hour"
+msgstr "Giá mỗi giờ"
+
+#: soccer/templates/soccer/admin_field_detail.html:46
+#: soccer/templates/soccer/admin_field_request_detail.html:74
+#: soccer/templates/soccer/field_request_detail.html:58
+#: soccer/templates/soccer/field_request_form.html:86
+#: soccer/templates/soccer/order_field.html:46
+#: soccer/templates/soccer/voucher_form.html:20
+#: soccer/templates/soccer/voucher_list_admin.html:20
+#: soccer/templates/soccer/voucher_list_user.html:17
+msgid "Description"
+msgstr "Mô tả"
+
+#: soccer/templates/soccer/admin_field_form.html:9
+#, fuzzy
+#| msgid "Order Soccer Field"
+msgid "Edit Soccer Field"
+msgstr "Đặt sân bóng"
+
+#: soccer/templates/soccer/admin_field_form.html:26
+#: soccer/templates/soccer/field_request_form.html:103
+#: soccer/templates/soccer/voucher_form.html:75
+msgid "Save"
+msgstr "Lưu"
+
+#: soccer/templates/soccer/admin_field_form.html:27
+#: soccer/templates/soccer/admin_order_detail.html:80
+#: soccer/templates/soccer/all_orders.html:47
+#: soccer/templates/soccer/field_request_form.html:104
+#: soccer/templates/soccer/my_field_requests.html:51
+#: soccer/templates/soccer/my_orders.html:46
+#: soccer/templates/soccer/review_field.html:38
+#: soccer/templates/soccer/voucher_delete.html:20
+#: soccer/templates/soccer/voucher_form.html:76
+msgid "Cancel"
+msgstr "Huỷ"
+
 #: soccer/templates/soccer/admin_field_request_detail.html:6
-#: soccer/templates/soccer/field_request_detail.html:7
+#: soccer/templates/soccer/field_request_detail.html:8
 #, fuzzy
 #| msgid "Order Details"
 msgid "Request Detail"
@@ -203,109 +383,28 @@ msgstr "Chi tiết đơn đặt"
 #: soccer/templates/soccer/admin_field_requests.html:26
 #: soccer/templates/soccer/admin_order_detail.html:13
 #: soccer/templates/soccer/all_orders.html:13
-#: soccer/templates/soccer/field_request_detail.html:11
+#: soccer/templates/soccer/field_request_detail.html:12
 msgid "User"
 msgstr "Người dùng"
 
-#: soccer/templates/soccer/admin_field_request_detail.html:18
-#: soccer/templates/soccer/admin_field_requests.html:27
-#: soccer/templates/soccer/field_detail.html:16
-#: soccer/templates/soccer/field_request_detail.html:14
-#: soccer/templates/soccer/field_request_form.html:20
-#: soccer/templates/soccer/home.html:35
-#: soccer/templates/soccer/my_field_requests.html:16
-#: soccer/templates/soccer/order_detail.html:51
-msgid "Type"
-msgstr "Loại sân"
-
-#: soccer/templates/soccer/admin_field_request_detail.html:24
-#: soccer/templates/soccer/admin_field_requests.html:28
-#: soccer/templates/soccer/admin_order_detail.html:25
-#: soccer/templates/soccer/all_orders.html:28
-#: soccer/templates/soccer/field_detail.html:31
-#: soccer/templates/soccer/field_request_detail.html:17
-#: soccer/templates/soccer/my_field_requests.html:22
-#: soccer/templates/soccer/my_orders.html:25
-#: soccer/templates/soccer/order_detail.html:23
-#: soccer/templates/soccer/voucher_list_admin.html:38
-#: soccer/templates/soccer/voucher_list_user.html:35
-msgid "Status"
-msgstr "Trạng thái"
-
 #: soccer/templates/soccer/admin_field_request_detail.html:31
-#: soccer/templates/soccer/field_request_detail.html:35
+#: soccer/templates/soccer/field_request_detail.html:36
 #, fuzzy
 #| msgid "Update Field"
 msgid "Target Field"
 msgstr "Cập nhật sân"
 
-#: soccer/templates/soccer/admin_field_request_detail.html:38
-#: soccer/templates/soccer/field_request_detail.html:39
-#: soccer/templates/soccer/field_request_form.html:37
-msgid "Name"
-msgstr "Tên"
-
-#: soccer/templates/soccer/admin_field_request_detail.html:44
-#: soccer/templates/soccer/field_detail.html:19
-#: soccer/templates/soccer/field_request_detail.html:42
-#: soccer/templates/soccer/field_request_form.html:44
-#: soccer/templates/soccer/home.html:36
-#: soccer/templates/soccer/order_detail.html:48
-msgid "Address"
-msgstr "Địa chỉ"
-
-#: soccer/templates/soccer/admin_field_request_detail.html:50
-#: soccer/templates/soccer/field_detail.html:22
-#: soccer/templates/soccer/field_request_detail.html:45
-#: soccer/templates/soccer/field_request_form.html:51
-#: soccer/templates/soccer/home.html:37
-#: soccer/templates/soccer/order_detail.html:54
-msgid "Phone"
-msgstr "Số điện thoại"
-
-#: soccer/templates/soccer/admin_field_request_detail.html:56
-#: soccer/templates/soccer/field_detail.html:25
-#: soccer/templates/soccer/field_request_detail.html:48
-#: soccer/templates/soccer/field_request_form.html:58
-#: soccer/templates/soccer/order_detail.html:57
-msgid "Email"
-msgstr "Email"
-
 #: soccer/templates/soccer/admin_field_request_detail.html:62
-#: soccer/templates/soccer/field_request_detail.html:51
+#: soccer/templates/soccer/field_request_detail.html:52
 #: soccer/templates/soccer/field_request_form.html:65
 #, fuzzy
 #| msgid "Update Field"
 msgid "Type of Field"
 msgstr "Cập nhật sân"
 
-#: soccer/templates/soccer/admin_field_request_detail.html:68
-#: soccer/templates/soccer/field_request_detail.html:54
-#: soccer/templates/soccer/field_request_form.html:72
-#, fuzzy
-#| msgid "Price per hour"
-msgid "Price per Hour"
-msgstr "Giá mỗi giờ"
-
-#: soccer/templates/soccer/admin_field_request_detail.html:74
-#: soccer/templates/soccer/field_request_detail.html:57
-#: soccer/templates/soccer/field_request_form.html:86
-#: soccer/templates/soccer/order_field.html:46
-#: soccer/templates/soccer/voucher_form.html:20
-#: soccer/templates/soccer/voucher_list_admin.html:20
-#: soccer/templates/soccer/voucher_list_user.html:17
-msgid "Description"
-msgstr "Mô tả"
-
-#: soccer/templates/soccer/admin_field_request_detail.html:81
-#: soccer/templates/soccer/field_request_detail.html:61
-#: soccer/templates/soccer/field_request_form.html:79
-msgid "Image"
-msgstr "Ảnh"
-
 #: soccer/templates/soccer/admin_field_request_detail.html:101
 #: soccer/templates/soccer/admin_field_requests.html:49
-#: soccer/templates/soccer/field_request_detail.html:75
+#: soccer/templates/soccer/field_request_detail.html:76
 #, fuzzy
 #| msgid "Approved"
 msgid "Approve"
@@ -313,7 +412,7 @@ msgstr "Đã duyệt"
 
 #: soccer/templates/soccer/admin_field_request_detail.html:102
 #: soccer/templates/soccer/admin_field_requests.html:50
-#: soccer/templates/soccer/field_request_detail.html:76
+#: soccer/templates/soccer/field_request_detail.html:77
 #, fuzzy
 #| msgid "Rejected"
 msgid "Reject"
@@ -333,7 +432,7 @@ msgstr "Tìm kiếm"
 
 #: soccer/templates/soccer/admin_field_requests.html:30
 #: soccer/templates/soccer/admin_order_detail.html:34
-#: soccer/templates/soccer/field_request_detail.html:23
+#: soccer/templates/soccer/field_request_detail.html:24
 #, fuzzy
 #| msgid "Deleted at"
 msgid "Created at"
@@ -344,13 +443,6 @@ msgstr "Thời điểm xoá"
 #: soccer/templates/soccer/my_orders.html:28
 msgid "Action"
 msgstr "Thao tác"
-
-#: soccer/templates/soccer/admin_field_requests.html:44
-#: soccer/templates/soccer/all_orders.html:45
-#: soccer/templates/soccer/my_field_requests.html:48
-#: soccer/templates/soccer/my_orders.html:41
-msgid "Detail"
-msgstr "Chi tiết"
 
 #: soccer/templates/soccer/admin_field_requests.html:56
 #, fuzzy
@@ -435,17 +527,6 @@ msgstr "Đóng"
 msgid "Are you sure you want to accept this order?"
 msgstr "Bạn có chắc muốn huỷ đơn này không?"
 
-#: soccer/templates/soccer/admin_order_detail.html:80
-#: soccer/templates/soccer/all_orders.html:47
-#: soccer/templates/soccer/field_request_form.html:104
-#: soccer/templates/soccer/my_field_requests.html:51
-#: soccer/templates/soccer/my_orders.html:46
-#: soccer/templates/soccer/review_field.html:38
-#: soccer/templates/soccer/voucher_delete.html:20
-#: soccer/templates/soccer/voucher_form.html:76
-msgid "Cancel"
-msgstr "Huỷ"
-
 #: soccer/templates/soccer/admin_order_detail.html:81
 msgid "Yes, Accept"
 msgstr "Đồng ý duyệt"
@@ -497,13 +578,13 @@ msgstr "Giá mỗi giờ"
 msgid "Order this field"
 msgstr "Đặt sân này"
 
-#: soccer/templates/soccer/field_request_detail.html:26
+#: soccer/templates/soccer/field_request_detail.html:27
 #, fuzzy
 #| msgid "Deleted at"
 msgid "Updated at"
 msgstr "Thời điểm xoá"
 
-#: soccer/templates/soccer/field_request_detail.html:31
+#: soccer/templates/soccer/field_request_detail.html:32
 msgid "Field Information"
 msgstr "Thông tin sân"
 
@@ -521,11 +602,6 @@ msgstr "Thời điểm xoá"
 msgid "Target Field (for update/delete only)"
 msgstr "Sân mục tiêu (chỉ cho cập nhật/xoá)"
 
-#: soccer/templates/soccer/field_request_form.html:103
-#: soccer/templates/soccer/voucher_form.html:75
-msgid "Save"
-msgstr "Lưu"
-
 #: soccer/templates/soccer/home.html:7
 msgid "Soccer Fields"
 msgstr "Sân bóng"
@@ -542,10 +618,6 @@ msgstr "Tất cả các loại"
 msgid "Filter"
 msgstr "Lọc"
 
-#: soccer/templates/soccer/home.html:47
-msgid "No soccer fields found."
-msgstr "Không tìm thấy sân bóng nào."
-
 #: soccer/templates/soccer/my_field_requests.html:8
 msgid "My Requests"
 msgstr "Yêu cầu của tôi"
@@ -561,17 +633,6 @@ msgstr "Thời điểm xoá"
 #| msgid "Deleted at"
 msgid "Created At"
 msgstr "Thời điểm xoá"
-
-#: soccer/templates/soccer/my_field_requests.html:28
-#: soccer/templates/soccer/voucher_list_admin.html:41
-msgid "Actions"
-msgstr "Thao tác"
-
-#: soccer/templates/soccer/my_field_requests.html:50
-#: soccer/templates/soccer/my_orders.html:43
-#: soccer/templates/soccer/voucher_list_admin.html:85
-msgid "Edit"
-msgstr "Sửa"
 
 #: soccer/templates/soccer/my_field_requests.html:58
 #, fuzzy
@@ -717,10 +778,6 @@ msgstr "Thêm voucher"
 #: soccer/templates/soccer/voucher_list_admin.html:44
 msgid "Deleted at"
 msgstr "Thời điểm xoá"
-
-#: soccer/templates/soccer/voucher_list_admin.html:77
-msgid "Deleted"
-msgstr "Đã xoá"
 
 #: soccer/templates/soccer/voucher_list_admin.html:79
 #: soccer/templates/soccer/voucher_list_user.html:54

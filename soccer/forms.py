@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
-from soccer.models import Order, Voucher, FieldRequest
+from soccer.models import Order, Voucher, FieldRequest, SoccerField
 from soccer.constants import MAX_LENGTH_1000, MIN_VALUE_1, MAX_VALUE_5, MAX_LENGTH_128, MAX_LENGTH_256, MAX_LENGTH_32
 
 class CustomUserCreationForm(UserCreationForm):
@@ -93,3 +93,18 @@ class FieldRequestForm(forms.ModelForm):
 
         return cleaned_data
     
+class SoccerFieldForm(forms.ModelForm):
+    class Meta:
+        model = SoccerField
+        fields = ['name', 'address', 'phone', 'email', 'type', 'image', 'price_per_hour', 'status', 'description']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'type': forms.Select(attrs={'class': 'form-select'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'price_per_hour': forms.NumberInput(attrs={'class': 'form-control'}),
+            'status': forms.Select(attrs={'class': 'form-select'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }

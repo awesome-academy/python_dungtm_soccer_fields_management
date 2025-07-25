@@ -1,0 +1,52 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+{% load base_extras %}
+{% load field_extras %}
+
+{% block content %}
+  <div class="container py-4 max-w-700">
+    <h3 class="mb-4"><i class="bi bi-eye me-2"></i>{% trans 'Field Detail' %}</h3>
+    <ul class="list-group mb-4">
+      <li class="list-group-item">
+        <b>{% trans 'Name' %}:</b> {{ field.name|dash_if_none }}
+      </li>
+      <li class="list-group-item">
+        <b>{% trans 'Type' %}:</b> {{ field.get_type_display|dash_if_none }}
+      </li>
+      <li class="list-group-item">
+        <b>{% trans 'Address' %}:</b> {{ field.address|dash_if_none }}
+      </li>
+      <li class="list-group-item">
+        <b>{% trans 'Phone' %}:</b> {{ field.phone|dash_if_none }}
+      </li>
+      <li class="list-group-item">
+        <b>{% trans 'Email' %}:</b> {{ field.email|dash_if_none }}
+      </li>
+      <li class="list-group-item">
+        <b>{% trans 'Price per Hour' %}:</b> {{ field.price_per_hour|floatformat:0|dash_if_none|intcomma }}₫
+      </li>
+      <li class="list-group-item">
+        <b>{% trans 'Status' %}:</b>
+        {% soccer_field_status_badge field %}
+        {% if field.deleted_at %}
+          <span class="badge bg-danger">{% trans 'Deleted' %}</span>
+        {% endif %}
+      </li>
+      <li class="list-group-item">
+        <b>{% trans 'Description' %}:</b> {{ field.description|dash_if_none }}
+      </li>
+      {% if field.image %}
+        <li class="list-group-item">
+          <b>{% trans 'Image' %}:</b><br />
+          <img src="{{ field.image.url }}" class="img-fluid rounded mt-2" style="max-width: 320px;" />
+        </li>
+      {% endif %}
+    </ul>
+    <div class="d-flex justify-content-between">
+      <a href="{% url 'admin_all_fields' %}" class="btn btn-secondary"><i class="bi bi-arrow-left me-1"></i> {% trans 'Back' %}</a>
+      <a href="{% url 'admin_edit_field' field.pk %}" class="btn btn-warning"><i class="bi bi-pencil me-1"></i> {% trans 'Edit' %}</a>
+    </div>
+  </div>
+{% endblock %}
