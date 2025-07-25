@@ -1,0 +1,76 @@
+{% extends 'base_generic.html' %}
+{% load field_request_extras %}
+{% load i18n %}
+
+{% block content %}
+<div class="container py-4">
+  <h3>{% trans "All Requests" %}</h3>
+  <form class="row mb-3">
+    <div class="col-auto">
+      <input type="text" name="searchtext" class="form-control" value="{{ searchtext }}" placeholder="{% trans 'Search text...' %}">
+    </div>
+    <div class="col-auto">
+      <select name="limit" class="form-select">
+        {% for n in limits %}
+          <option value="{{ n }}" {% if limit|stringformat:"s" == n|stringformat:"s" %}selected{% endif %}>{{ n }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary"><i class="me-1 bi bi-search"></i>{% trans 'Search' %}</button>
+    </div>
+  </form>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>{% trans "User" %}</th>
+        <th>{% trans "Type" %}</th>
+        <th>{% trans "Status" %}</th>
+        <th>{% trans "Note" %}</th>
+        <th>{% trans "Created at" %}</th>
+        <th>{% trans "Action" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in requests %}
+      <tr>
+        <td>{{ r.user.username }}</td>
+        <td>{{ r.get_type_display }}</td>
+        <td>{% field_request_status_badge r %}</td>
+        <td>{{ r.note|truncatechars:40 }}</td>
+        <td>{{ r.created_at|date:DATE_TIME_FORMAT }}</td>
+        <td>
+          <a href="{% url 'admin_field_request_detail' r.pk %}" class="btn btn-sm btn-info">
+            <i class="me-1 bi bi-eye"></i>{% trans 'Detail' %}
+          </a>
+          {% if r.status == "pending" %}
+            <form method="post" action="{% url 'admin_update_field_request_status' r.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" name="action" value="approve" class="btn btn-success btn-sm"><i class="me-1 bi bi-check"></i>{% trans 'Approve' %}</button>
+              <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm"><i class="me-1 bi bi-x"></i>{% trans 'Reject' %}</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6">{% trans "No requests found." %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if requests.has_other_pages %}
+    <nav>
+      <ul class="pagination">
+        {% if requests.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ requests.previous_page_number }}&searchtext={{ searchtext }}&limit={{ limit }}">«</a></li>
+        {% endif %}
+        {% for i in requests.paginator.page_range %}
+          <li class="page-item {% if i == requests.number %}active{% endif %}"><a class="page-link" href="?page={{ i }}&searchtext={{ searchtext }}&limit={{ limit }}">{{ i }}</a></li>
+        {% endfor %}
+        {% if requests.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ requests.next_page_number }}&searchtext={{ searchtext }}&limit={{ limit }}">»</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+</div>
+{% endblock %}

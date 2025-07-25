@@ -22,6 +22,7 @@ class RequestStatus(models.TextChoices):
     PENDING = 'pending', _('Pending')
     APPROVED = 'approved', _('Approved')
     REJECTED = 'rejected', _('Rejected')
+    CANCELLED = 'cancelled', _('Cancelled')
 
 class SoccerFieldType(models.TextChoices):
     INDOOR = 'indoor', _('Indoor')

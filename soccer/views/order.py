@@ -85,12 +85,6 @@ def order_detail(request, pk):
         "review": review,
         "all_statuses": OrderStatus,
     })
-    return render(request, 'soccer/order_detail.html', {
-        "order": order,
-        "total_price": total_price,
-        "review": review,
-        "all_statuses": OrderStatus,
-    })
 
 @login_required
 def my_orders(request):

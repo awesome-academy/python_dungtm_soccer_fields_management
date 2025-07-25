@@ -45,3 +45,7 @@ body {
 .star-rating label span { 
   transition: color 0.2s; 
 }
+
+.max-w-300 {
+  max-width: 300px;
+}

@@ -1,0 +1,111 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="container py-4 max-w-600">
+    <h3 class="mb-4 text-center">
+      {% if edit %}
+        {% trans 'Edit Field Request' %}
+      {% else %}
+        {% trans 'Create Field Request' %}
+      {% endif %}
+    </h3>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label><b>{% trans 'Type' %}</b></label>
+        {{ form.type|add_class:'form-select' }}
+        {% if form.type.errors %}
+          <div class="text-danger small">{{ form.type.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div id="field-selector" class="mb-3" style="display: none;">
+        <label><b>{% trans 'Target Field (for update/delete only)' %}</b></label>
+        {{ form.soccer_field|add_class:'form-select' }}
+        {% if form.soccer_field.errors %}
+          <div class="text-danger small">{{ form.soccer_field.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div id="field-details" style="display: none;">
+        <div class="mb-3">
+          <label><b>{% trans 'Name' %}</b></label>
+          {{ form.name|add_class:'form-control' }}
+          {% if form.name.errors %}
+            <div class="text-danger small">{{ form.name.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label><b>{% trans 'Address' %}</b></label>
+          {{ form.address|add_class:'form-control' }}
+          {% if form.address.errors %}
+            <div class="text-danger small">{{ form.address.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label><b>{% trans 'Phone' %}</b></label>
+          {{ form.phone|add_class:'form-control' }}
+          {% if form.phone.errors %}
+            <div class="text-danger small">{{ form.phone.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label><b>{% trans 'Email' %}</b></label>
+          {{ form.email|add_class:'form-control' }}
+          {% if form.email.errors %}
+            <div class="text-danger small">{{ form.email.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label><b>{% trans 'Type of Field' %}</b></label>
+          {{ form.type_field|add_class:'form-select' }}
+          {% if form.type_field.errors %}
+            <div class="text-danger small">{{ form.type_field.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label><b>{% trans 'Price per Hour' %}</b></label>
+          {{ form.price_per_hour|add_class:'form-control' }}
+          {% if form.price_per_hour.errors %}
+            <div class="text-danger small">{{ form.price_per_hour.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label><b>{% trans 'Image' %}</b></label>
+          {{ form.image|add_class:'form-control' }}
+          {% if form.image.errors %}
+            <div class="text-danger small">{{ form.image.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label><b>{% trans 'Description' %}</b></label>
+          {{ form.description|add_class:'form-control' }}
+          {% if form.description.errors %}
+            <div class="text-danger small">{{ form.description.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label><b>{% trans 'Note' %}</b></label>
+        {{ form.note|add_class:'form-control' }}
+        {% if form.note.errors %}
+          <div class="text-danger small">{{ form.note.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div class="mb-3 text-end">
+        <button class="btn btn-success">{% trans 'Save' %}</button>
+        <a href="{% url 'my_field_requests' %}" class="btn btn-secondary">{% trans 'Cancel' %}</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/field_request.js' %}"></script>
+{% endblock %}

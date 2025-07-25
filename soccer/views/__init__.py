@@ -7,3 +7,8 @@ from .order import (order_field, order_detail, my_orders,
                     admin_order_detail, review_field, edit_review)
 from .voucher import (voucher_list_user, voucher_list_admin, 
                       voucher_create, voucher_edit, voucher_delete)
+from .field_request import (my_field_requests, create_field_request,
+                           edit_field_request, field_request_detail,
+                           admin_field_requests, admin_field_request_detail,
+                           cancel_field_request, admin_update_field_request_status,
+                           admin_field_request_detail)

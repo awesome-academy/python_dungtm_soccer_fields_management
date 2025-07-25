@@ -1,0 +1,83 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+{% load static %}
+{% load base_extras %}
+
+{% block content %}
+  <div class="container py-4 max-w-700">
+    <h3 class="mb-4"><i class="bi bi-card-text me-2"></i>{% trans 'Request Detail' %}</h3>
+
+    <ul class="list-group mb-4">
+      <li class="list-group-item">
+        <i class="bi bi-person-circle me-2"></i><b>{% trans 'User' %}:</b> {{ fr.user.username }}
+      </li>
+      <li class="list-group-item">
+        <i class="bi bi-tag me-2"></i><b>{% trans 'Type' %}:</b> {{ fr.get_type_display }}
+      </li>
+      <li class="list-group-item">
+        <i class="bi bi-info-circle me-2"></i><b>{% trans 'Status' %}:</b> {{ fr.get_status_display }}
+      </li>
+      <li class="list-group-item">
+        <i class="bi bi-chat-left-text me-2"></i><b>{% trans 'Note' %}:</b> {{ fr.note|dash_if_none }}
+      </li>
+      <li class="list-group-item">
+        <i class="bi bi-calendar-plus me-2"></i><b>{% trans 'Created at' %}:</b> {{ fr.created_at|date:DATE_TIME_FORMAT }}
+      </li>
+      <li class="list-group-item">
+        <i class="bi bi-calendar-check me-2"></i><b>{% trans 'Updated at' %}:</b> {{ fr.updated_at|date:DATE_TIME_FORMAT }}
+      </li>
+    </ul>
+
+    {% if fr.type != 'delete' %}
+      <h5 class="mb-3"><i class="bi bi-building me-2"></i>{% trans 'Field Information' %}</h5>
+      <ul class="list-group mb-4">
+        {% if fr.soccer_field %}
+          <li class="list-group-item">
+            <i class="bi bi-signpost-2 me-2"></i><b>{% trans 'Target Field' %}:</b> {{ fr.soccer_field.name }}
+          </li>
+        {% endif %}
+        <li class="list-group-item">
+          <b>{% trans 'Name' %}:</b> {{ fr.name|dash_if_none }}
+        </li>
+        <li class="list-group-item">
+          <b>{% trans 'Address' %}:</b> {{ fr.address|dash_if_none }}
+        </li>
+        <li class="list-group-item">
+          <b>{% trans 'Phone' %}:</b> {{ fr.phone|dash_if_none }}
+        </li>
+        <li class="list-group-item">
+          <b>{% trans 'Email' %}:</b> {{ fr.email|dash_if_none }}
+        </li>
+        <li class="list-group-item">
+          <b>{% trans 'Type of Field' %}:</b> {{ fr.get_type_field_display|dash_if_none }}
+        </li>
+        <li class="list-group-item">
+          <b>{% trans 'Price per Hour' %}:</b> {{ fr.price_per_hour|dash_if_none }}
+        </li>
+        <li class="list-group-item">
+          <b>{% trans 'Description' %}:</b> {{ fr.description|dash_if_none }}
+        </li>
+        {% if fr.image %}
+          <li class="list-group-item">
+            <b>{% trans 'Image' %}:</b><br />
+            <img src="{{ fr.image.url }}" class="img-fluid rounded mt-2" class="max-w-300" />
+          </li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    <div class="d-flex justify-content-between">
+      <a href="{% url 'my_field_requests' %}" class="btn btn-secondary"><i class="bi bi-arrow-left me-1"></i> {% trans 'Back' %}</a>
+
+      {% if fr.status == request_status.PENDING and request.user.is_staff %}
+        <form method="post" action="{% url 'admin_update_field_request_status' fr.pk %}">
+          {% csrf_token %}
+          <div class="d-flex gap-2">
+            <button type="submit" name="action" value="approve" class="btn btn-success"><i class="bi bi-check-circle me-1"></i>{% trans 'Approve' %}</button>
+            <button type="submit" name="action" value="reject" class="btn btn-danger"><i class="bi bi-x-circle me-1"></i>{% trans 'Reject' %}</button>
+          </div>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

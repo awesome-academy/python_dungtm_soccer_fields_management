@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
-from soccer.models import Order, Voucher
-from soccer.constants import MAX_LENGTH_1000, MIN_VALUE_1, MAX_VALUE_5
+from soccer.models import Order, Voucher, FieldRequest
+from soccer.constants import MAX_LENGTH_1000, MIN_VALUE_1, MAX_VALUE_5, MAX_LENGTH_128, MAX_LENGTH_256, MAX_LENGTH_32
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, label="Email")
@@ -59,3 +59,37 @@ class VoucherForm(forms.ModelForm):
 class ReviewForm(forms.Form):
     rate = forms.IntegerField(min_value=MIN_VALUE_1, max_value=MAX_VALUE_5, label=_("Rate"),)
     comment = forms.CharField(widget=forms.Textarea, label=_("Comment"), max_length=MAX_LENGTH_1000, required=False)
+
+class FieldRequestForm(forms.ModelForm):
+    class Meta:
+        model = FieldRequest
+        fields = [
+            'type', 'soccer_field', 'name', 'address', 'phone', 'email',
+            'type_field', 'price_per_hour', 'image', 'description', 'note'
+        ]
+        widgets = {
+            'type': forms.Select(attrs={'class': 'form-select'}),
+            'soccer_field': forms.Select(attrs={'class': 'form-select'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'maxlength': MAX_LENGTH_128}),
+            'address': forms.TextInput(attrs={'class': 'form-control', 'maxlength': MAX_LENGTH_256}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'maxlength': MAX_LENGTH_32}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'type_field': forms.Select(attrs={'class': 'form-select'}),
+            'price_per_hour': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'note': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        type = cleaned_data.get("type")
+        soccer_field = cleaned_data.get("soccer_field")
+
+        if type in ['update', 'delete'] and not soccer_field:
+            self.add_error("soccer_field", _("This field is required."))
+        elif type == 'add':
+            cleaned_data["soccer_field"] = None
+
+        return cleaned_data
+    

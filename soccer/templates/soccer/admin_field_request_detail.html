@@ -1,0 +1,107 @@
+{% extends 'base_generic.html' %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container py-4">
+    <h3>{% trans 'Request Detail' %}</h3>
+
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>
+            {% trans 'User' %}
+          </th>
+          <td>{{ fr.user.username }}</td>
+        </tr>
+        <tr>
+          <th>
+            {% trans 'Type' %}
+          </th>
+          <td>{{ fr.get_type_display }}</td>
+        </tr>
+        <tr>
+          <th>
+            {% trans 'Status' %}
+          </th>
+          <td>{{ fr.get_status_display }}</td>
+        </tr>
+        {% if fr.soccer_field %}
+          <tr>
+            <th>
+              {% trans 'Target Field' %}
+            </th>
+            <td>{{ fr.soccer_field.name }}</td>
+          </tr>
+        {% endif %}
+        <tr>
+          <th>
+            {% trans 'Name' %}
+          </th>
+          <td>{{ fr.name }}</td>
+        </tr>
+        <tr>
+          <th>
+            {% trans 'Address' %}
+          </th>
+          <td>{{ fr.address }}</td>
+        </tr>
+        <tr>
+          <th>
+            {% trans 'Phone' %}
+          </th>
+          <td>{{ fr.phone }}</td>
+        </tr>
+        <tr>
+          <th>
+            {% trans 'Email' %}
+          </th>
+          <td>{{ fr.email }}</td>
+        </tr>
+        <tr>
+          <th>
+            {% trans 'Type of Field' %}
+          </th>
+          <td>{{ fr.get_type_field_display }}</td>
+        </tr>
+        <tr>
+          <th>
+            {% trans 'Price per Hour' %}
+          </th>
+          <td>{{ fr.price_per_hour }}</td>
+        </tr>
+        <tr>
+          <th>
+            {% trans 'Description' %}
+          </th>
+          <td>{{ fr.description }}</td>
+        </tr>
+        {% if fr.image %}
+          <tr>
+            <th>
+              {% trans 'Image' %}
+            </th>
+            <td>
+              <img src="{{ fr.image.url }}" class="max-w-300" />
+            </td>
+          </tr>
+        {% endif %}
+        <tr>
+          <th>
+            {% trans 'Note' %}
+          </th>
+          <td>{{ fr.note }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    {% if fr.status == 'pending' %}
+      <form method="post" action="{% url 'admin_update_field_request_status' fr.pk %}">
+        {% csrf_token %}
+        <div class="text-end">
+          <button type="submit" name="action" value="approve" class="btn btn-success">{% trans 'Approve' %}</button>
+          <button type="submit" name="action" value="reject" class="btn btn-danger">{% trans 'Reject' %}</button>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+{% endblock %}
