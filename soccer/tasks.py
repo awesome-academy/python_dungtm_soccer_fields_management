@@ -1,7 +1,12 @@
 from django.utils import timezone
 from django.db.models import F, ExpressionWrapper, DateTimeField
 from .models import Order, OrderStatus
+from django.contrib.auth.models import User
+from datetime import timedelta
+from celery import shared_task
+from soccer.constants import MAX_ACTIVATE_DURATION_ACCOUNT_HOURS
 
+@shared_task
 def auto_complete_orders():
     now = timezone.now()
 
@@ -22,3 +27,11 @@ def auto_complete_orders():
         print(f"[auto_complete_orders] ERROR: {e}")
         return "Error completing orders."
 
+@shared_task
+def delete_expired_inactive_users():
+    expire_hours = MAX_ACTIVATE_DURATION_ACCOUNT_HOURS
+    deadline = timezone.now() - timedelta(hours=expire_hours)
+    users = User.objects.filter(is_active=False, date_joined__lt=deadline)
+    count = users.count()
+    users.delete()
+    return f"Deleted {count} expired, inactive users."
