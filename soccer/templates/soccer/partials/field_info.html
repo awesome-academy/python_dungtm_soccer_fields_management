@@ -1,0 +1,19 @@
+{% load humanize %}
+{% load i18n %}
+
+<div class="small {% if not compact %}mb-3{% endif %}">
+  <div class="d-flex {% if compact %}mb-1{% else %}mb-2{% endif %}">
+    <div class="me-2 text-muted"><i class="bi bi-geo-alt"></i></div>
+    <div>{{ field.address }}</div>
+  </div>
+  <div class="d-flex {% if compact %}mb-1{% else %}mb-2{% endif %}">
+    <div class="me-2 text-muted"><i class="bi bi-telephone"></i></div>
+    <div>{{ field.phone }}</div>
+  </div>
+  <div class="d-flex">
+    <div class="me-2 text-muted"><i class="bi bi-cash-coin"></i></div>
+    <div class="fw-bold text-success">
+      {{ field.price_per_hour|floatformat:0|intcomma }} VND / {% trans "hour" %}
+    </div>
+  </div>
+</div>

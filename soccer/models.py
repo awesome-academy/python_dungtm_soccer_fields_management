@@ -78,7 +78,7 @@ class Review(models.Model):
     soccer_field = models.ForeignKey(SoccerField, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rate = models.PositiveSmallIntegerField()
-    comment = models.TextField(blank=True)  # có thể cho phép không comment, nhưng thường nên bắt buộc
+    comment = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

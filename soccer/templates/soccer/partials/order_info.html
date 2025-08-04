@@ -1,0 +1,76 @@
+{% load i18n %}
+{% load order_extras %}
+{% load humanize %}
+
+<div class="card mb-3">
+  <div class="card-header bg-light">
+    <h5 class="mb-0">{% trans 'Order Information' %}</h5>
+  </div>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="d-flex">
+          <div class="text-muted me-2"><i class="bi bi-calendar-event"></i></div>
+          <div>
+            <div class="small text-muted">{% trans 'Order Time' %}</div>
+            <div class="fw-medium">{{ order.time|date:"l, F j, Y" }}</div>
+            <div>{{ order.time|time:"H:i" }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex">
+          <div class="text-muted me-2"><i class="bi bi-clock"></i></div>
+          <div>
+            <div class="small text-muted">{% trans 'Duration' %}</div>
+            <div class="fw-medium">{{ order.duration|duration_display }}</div>
+          </div>
+        </div>
+      </div>
+      {% if order.status %}
+      <div class="col-md-6">
+        <div class="d-flex">
+          <div class="text-muted me-2"><i class="bi bi-info-circle"></i></div>
+          <div>
+            <div class="small text-muted">{% trans 'Status' %}</div>
+            <div>{% order_status_badge order %}</div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if order.voucher %}
+      <div class="col-md-6">
+        <div class="d-flex">
+          <div class="text-muted me-2"><i class="bi bi-ticket-perforated"></i></div>
+          <div>
+            <div class="small text-muted">{% trans 'Voucher' %}</div>
+            <div class="fw-medium">{{ order.voucher.code }} ({{ order.voucher.discount_percent }}%)</div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if order.note %}
+      <div class="col-12">
+        <div class="d-flex">
+          <div class="text-muted me-2"><i class="bi bi-chat-left-text"></i></div>
+          <div>
+            <div class="small text-muted">{% trans 'Note' %}</div>
+            <div>{{ order.note }}</div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if order.cancel_reason %}
+      <div class="col-12">
+        <div class="d-flex">
+          <div class="text-muted me-2"><i class="bi bi-x-circle"></i></div>
+          <div>
+            <div class="small text-muted">{% trans 'Cancel Reason' %}</div>
+            <div class="text-danger">{{ order.cancel_reason }}</div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

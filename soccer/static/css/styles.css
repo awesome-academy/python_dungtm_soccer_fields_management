@@ -6,6 +6,7 @@
 
 body {
   padding-top: 64px;
+  min-height: 100vh;
 }
 
 .logout {
@@ -48,4 +49,212 @@ body {
 
 .max-w-300 {
   max-width: 300px;
+}
+
+/* Base colors and variables */
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #2196F3;
+  --accent-color: #FF9800;
+  --header-height: 70px;
+}
+
+/* Auth pages styles */
+.auth-page {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.auth-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.auth-brand-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.language-selector-wrapper {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+/* Main layout styles */
+.main-header {
+  height: var(--header-height);
+  background-color: white;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.brand-logo {
+  color: var(--primary-color);
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.brand-logo:hover {
+  color: var(--secondary-color);
+}
+
+.nav-link {
+  color: #555;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+  padding: 8px 12px !important;
+  border-radius: 6px;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary-color);
+  background-color: rgba(76, 175, 80, 0.08);
+}
+
+.dropdown-item:active, .dropdown-item:focus {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--primary-color);
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.btn-outline-primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #3d8b40;
+  border-color: #3d8b40;
+}
+
+.content-wrapper {
+  padding-top: 30px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Footer styles */
+.site-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: 30px;
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+  }
+}
+
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Admin field requests styles */
+.avatar {
+  font-size: 0.875rem;
+}
+
+.empty-state {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #6c757d;
+}
+
+/* Soccer field admin styles */
+.field-image-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.field-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.field-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.field-image-container:hover .field-thumbnail {
+  transform: scale(1.1);
+}
+
+.field-image-container:hover .field-image-overlay {
+  opacity: 1;
+}
+
+.field-placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
 }

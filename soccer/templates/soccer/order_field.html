@@ -2,64 +2,97 @@
 {% load i18n %}
 {% load static %}
 {% load humanize %}
+{% load order_extras %}
+{% load field_extras %}
 
 {% block content %}
   <div class="container py-4" id="order-field-root" data-price="{{ field.price_per_hour|floatformat:'2' }}">
-    <h3 class="mb-4">{% trans 'Order Soccer Field' %}: {{ field.name }}</h3>
-    <form method="post">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label><b>{% trans 'Time' %}</b></label>
-        {{ form.time }}
-        {% if form.time.errors %}
-          <div class="text-danger small">{{ form.time.errors }}</div>
-        {% endif %}
-      </div>
-      <div class="mb-3">
-        <label><b>{% trans 'Duration' %}</b></label>
-        {{ form.duration }}
-        {% if form.duration.errors %}
-          <div class="text-danger small">{{ form.duration.errors }}</div>
-        {% endif %}
-      </div>
-      <div class="mb-3">
-        <label><b>{% trans 'Note' %}</b></label>
-        {{ form.note }}
-        {% if form.note.errors %}
-          <div class="text-danger small">{{ form.note.errors }}</div>
-        {% endif %}
-      </div>
-      <div class="mb-3">
-        <label><b>{% trans 'Voucher' %}</b></label>
-        <select name="voucher" class="form-control" id="voucher-select">
-          <option value="">
-            {% trans 'No voucher' %}
-          </option>
-          {% for v in vouchers %}
-            <option value="{{ v.id }}" data-description="{{ v.description|default:'' }}" data-discount="{{ v.discount_percent }}" data-validfrom="{{ v.valid_from|date:DATE_FORMAT }}" data-validto="{{ v.valid_to|date:DATE_FORMAT }}" data-minprice="{{ v.min_price }}" data-maxdiscount="{{ v.max_discount_amount }}" data-rest="{{ v.rest_quantity }}">{{ v.code }} ({{ v.discount_percent }}%)</option>
-          {% endfor %}
-        </select>
-        {% if form.voucher.errors %}
-          <div class="text-danger small">{{ form.voucher.errors }}</div>
-        {% endif %}
-        <div id="voucher-detail" class="bg-light rounded p-2 mt-2 border hidden">
-          <b>{% trans 'Description' %}:</b> <span id="voucher-description"></span><br />
-          <b>{% trans 'Discount' %}:</b> <span id="voucher-discount"></span>%<br />
-          <b>{% trans 'Valid' %}:</b> <span id="voucher-validfrom"></span> - <span id="voucher-validto"></span><br />
-          <b>{% trans 'Min price' %}:</b> <span id="voucher-minprice"></span><br />
-          <b>{% trans 'Max discount' %}:</b> <span id="voucher-maxdiscount"></span><br />
-          <b>{% trans 'Rest quantity' %}:</b> <span id="voucher-rest"></span>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">{% trans 'Order Soccer Field' %}</h3>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <h4>{{ field.name }}</h4>
+              {% field_info field %}
+            </div>
+            
+            <form method="post">
+              {% csrf_token %}
+              <div class="row mb-3">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="form-label fw-bold">{% trans 'Time' %}</label>
+                  {{ form.time }}
+                  {% if form.time.errors %}
+                    <div class="text-danger small">{{ form.time.errors }}</div>
+                  {% endif %}
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">{% trans 'Duration' %}</label>
+                  {{ form.duration }}
+                  {% if form.duration.errors %}
+                    <div class="text-danger small">{{ form.duration.errors }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label fw-bold">{% trans 'Note' %}</label>
+                {{ form.note }}
+                {% if form.note.errors %}
+                  <div class="text-danger small">{{ form.note.errors }}</div>
+                {% endif %}
+              </div>
+              
+              {% voucher_select vouchers form DATE_FORMAT %}
+              
+              <div class="mb-3">
+                <div class="card bg-light">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">{% trans 'Total Price' %}</h5>
+                      <div id="total-price" class="fw-bold fs-4 text-success">{{ total_price|default:"0"|floatformat:0|intcomma }} VND</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {% if error_message %}
+                <div class="alert alert-danger">{{ error_message }}</div>
+              {% endif %}
+              
+              <div class="text-end">
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary me-2">{% trans 'Cancel' %}</a>
+                <button type="submit" class="btn btn-success">
+                  <i class="bi bi-calendar-check me-1"></i> {% trans 'Place Order' %}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-      <div class="mb-3">
-        <label><b>{% trans 'Total Price' %}</b></label>
-        <div id="total-price" class="form-control-plaintext fw-bold">{{ total_price|floatformat:0|intcomma }} VND</div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header bg-light">
+            <h5 class="mb-0">{% trans 'Order Summary' %}</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li class="d-flex justify-content-between mb-2">
+                <span>{% trans 'Field Price' %}:</span>
+                <span class="fw-medium">{{ field.price_per_hour|floatformat:0|intcomma }} VND/{% trans 'hour' %}</span>
+              </li>
+              <li class="d-flex justify-content-between">
+                <span>{% trans 'Field Type' %}:</span>
+                <span>{% field_type_badge field.type %}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      {% if error_message %}
-        <div class="alert alert-danger">{{ error_message }}</div>
-      {% endif %}
-      <button class="btn btn-success">{% trans 'Order' %}</button>
-    </form>
+    </div>
   </div>
   <script src="{% static 'js/order_field.js' %}"></script>
 {% endblock %}

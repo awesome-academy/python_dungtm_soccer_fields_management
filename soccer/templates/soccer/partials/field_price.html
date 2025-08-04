@@ -1,0 +1,23 @@
+{% load humanize %}
+{% load i18n %}
+
+<div class="card border-light mb-3">
+  <div class="card-body">
+    <div class="d-flex align-items-center justify-content-between">
+      <span class="fw-bold text-muted">{% trans 'Price' %}</span>
+      <span class="fw-bold text-success fs-4">{{ price|floatformat:0|intcomma }} VND</span>
+    </div>
+    {% if discount_percent %}
+    <div class="d-flex align-items-center justify-content-between mt-2">
+      <span class="small text-muted">{% trans 'Discount' %}</span>
+      <span class="badge bg-danger">-{{ discount_percent }}%</span>
+    </div>
+    {% endif %}
+    {% if original_price %}
+    <div class="d-flex align-items-center justify-content-between mt-1">
+      <span class="small text-muted">{% trans 'Original' %}</span>
+      <span class="text-decoration-line-through text-muted">{{ original_price|floatformat:0|intcomma }} VND</span>
+    </div>
+    {% endif %}
+  </div>
+</div>
