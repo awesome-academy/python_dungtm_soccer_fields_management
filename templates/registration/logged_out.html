@@ -1,10 +1,30 @@
 {% extends 'auth_generic.html' %}
 {% load i18n %}
 
+{% block auth_subtitle %}{% trans 'You have successfully logged out' %}{% endblock %}
+
 {% block content %}
-  <h4 class="mb-4 text-center">{% trans 'Thank you for visiting my website' %}</h4>
-  <form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
-  </form>
+  <div class="text-center">
+    <div class="mb-4">
+      <div class="d-flex justify-content-center">
+        <div class="rounded-circle bg-success bg-opacity-10 p-3 mb-3">
+          <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+        </div>
+      </div>
+      <h4 class="mb-3">{% trans 'You have been logged out' %}</h4>
+      <p class="text-muted">{% trans 'Thank you for visiting Soccer Fields Management. We hope to see you again soon!' %}</p>
+    </div>
+    
+    <div class="d-grid gap-2 col-md-8 mx-auto">
+      <a href="{% url 'login' %}" class="btn btn-primary">
+        <i class="bi bi-box-arrow-in-right me-2"></i>{% trans 'Log in again' %}
+      </a>
+    </div>
+  </div>
+{% endblock %}
+
+{% block auth_footer %}
+  <p class="small text-muted">
+    {% trans 'For security reasons, please close your browser if you are on a public computer.' %}
+  </p>
 {% endblock %}

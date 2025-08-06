@@ -3,5 +3,27 @@
 {% load widget_tweaks %}
 
 {% block content %}
-  <h3 class="mb-4 text-center">{% trans 'Register Done' %}</h3>
+  <div class="card shadow-sm border-0">
+    <div class="card-body text-center p-5">
+      <div class="mb-4">
+        <i class="bi bi-envelope-check-fill text-primary" style="font-size: 5rem;"></i>
+      </div>
+      <h3 class="mb-3">{% trans 'Registration Complete!' %}</h3>
+      <p class="text-muted mb-2">
+        {% trans 'Your account has been created successfully.' %}
+      </p>
+      <p class="alert alert-info mx-auto mb-4" style="max-width: 500px;">
+        <i class="bi bi-info-circle me-2"></i>
+        {% trans 'Please check your email to activate your account. We have sent an activation link to the email address you provided.' %}
+      </p>
+      <div class="d-grid gap-2 col-md-6 mx-auto">
+        <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left me-2"></i>{% trans 'Back to Login' %}
+        </a>
+        <a href="{% url 'home' %}" class="btn btn-primary">
+          <i class="bi bi-house me-2"></i>{% trans 'Go to Homepage' %}
+        </a>
+      </div>
+    </div>
+  </div>
 {% endblock %}

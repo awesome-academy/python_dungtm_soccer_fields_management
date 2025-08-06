@@ -19,10 +19,12 @@ from django.urls import path
 from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import RedirectView
 from soccer.views.auth import register
 from soccer import views
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/soccer/', permanent=True), name='home'),
     path('admin/', admin.site.urls),
     path('register/', register, name='register'),
     path('soccer/', include('soccer.urls')),
@@ -30,3 +32,5 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/', views.activate_account, name='activate_account'),
     path('i18n/', include('django.conf.urls.i18n')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

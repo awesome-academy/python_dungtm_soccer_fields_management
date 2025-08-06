@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from soccer.forms import OrderFieldForm, ReviewForm
 from soccer.models import SoccerField, Order, Voucher, Review
-from soccer.enums import OrderStatus
+from soccer.enums import OrderStatus, OrderDurationChoice
 from decimal import Decimal
 from datetime import timedelta
 from django.utils.translation import gettext as _
@@ -11,24 +11,25 @@ from soccer.constants import DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT
 from soccer.decorators import admin_required
 from django.http import JsonResponse
 from soccer.utils import user_can_review_field
-from soccer.utils import user_can_review_field
 
 @login_required
 def order_field(request, pk):
     field = get_object_or_404(SoccerField, pk=pk)
     vouchers = Voucher.objects.filter(rest_quantity__gt=0)
     error_message = None
-
+    total_price = None
+    
     if request.method == 'POST':
         form = OrderFieldForm(request.POST)
         if form.is_valid():
             time = form.cleaned_data['time']
             duration = form.cleaned_data['duration']
             end_time = time + timedelta(minutes=duration)
-
+            
+            active_statuses = [OrderStatus.PENDING, OrderStatus.CONFIRMED, OrderStatus.COMPLETED]
             overlap_orders = Order.objects.filter(
                 soccer_field=field,
-                status__in=[OrderStatus.PENDING, OrderStatus.CONFIRMED, OrderStatus.COMPLETED],
+                status__in=active_statuses,
                 time__lt=end_time
             )
 
@@ -48,21 +49,34 @@ def order_field(request, pk):
                     order.soccer_field = field
                     order.status = OrderStatus.PENDING
                     order.save()
+                    
                     if order.voucher:
                         order.voucher.rest_quantity = max(0, order.voucher.rest_quantity - 1)
                         order.voucher.save()
+                        
                 return redirect('order_detail', pk=order.pk)
+        else:
+            if 'duration' in form.cleaned_data and form.cleaned_data['duration']:
+                duration_min = form.cleaned_data['duration']
+                total_price = field.price_per_hour * (Decimal(duration_min) / Decimal(60))
     else:
         form = OrderFieldForm()
+        
+        if hasattr(OrderDurationChoice, 'DURATION_60'):
+            form.initial['duration'] = OrderDurationChoice.DURATION_60
+            total_price = field.price_per_hour  # 1 hour is the default
 
-    return render(request, 'soccer/order_field.html', {
+    context = {
         'form': form,
         'field': field,
         'vouchers': vouchers,
         'error_message': error_message,
-        'total_price': None,
-        'DATE_FORMAT': DATE_FORMAT
-    })
+        'total_price': total_price,
+        'DATE_FORMAT': DATE_FORMAT,
+        'order_durations': OrderDurationChoice,
+    }
+    
+    return render(request, 'soccer/order_field.html', context)
 
 @login_required
 def order_detail(request, pk):
@@ -96,6 +110,23 @@ def order_edit(request, pk):
     order = get_object_or_404(Order, pk=pk, user=request.user)
     if order.status != OrderStatus.PENDING:
         return render(request, 'soccer/403.html', status=403)
+        
+    field = order.soccer_field
+    vouchers = Voucher.objects.filter(rest_quantity__gt=0)
+    error_message = None
+    total_price = None
+    
+    duration_min = order.duration
+    base_price = field.price_per_hour * (Decimal(duration_min) / Decimal(60))
+    
+    if order.voucher:
+        discount = base_price * (order.voucher.discount_percent / Decimal(100))
+        if discount > order.voucher.max_discount_amount:
+            discount = order.voucher.max_discount_amount
+        total_price = base_price - discount
+    else:
+        total_price = base_price
+    
     if request.method == "POST":
         form = OrderFieldForm(request.POST, instance=order)
         if form.is_valid():
@@ -103,14 +134,17 @@ def order_edit(request, pk):
             return redirect('order_detail', pk=order.pk)
     else:
         form = OrderFieldForm(instance=order)
+    
     return render(request, "soccer/order_field.html", {
         "form": form,
-        "field": order.soccer_field,
-        "vouchers": Voucher.objects.filter(rest_quantity__gt=0),
-        "error_message": None,
-        "total_price": None,
+        "field": field,
+        "vouchers": vouchers,
+        "error_message": error_message,
+        "total_price": total_price,
         "DATE_FORMAT": DATE_FORMAT,
-        "edit_mode": True
+        "edit_mode": True,
+        "order": order,
+        "order_durations": OrderDurationChoice,
     })
 
 @login_required
@@ -123,6 +157,7 @@ def order_cancel(request, pk):
         return render(request, "soccer/order_cancel_confirm.html", {
             "order": order,
             "error_message": error_message,
+            "DATE_TIME_FORMAT": DATE_TIME_FORMAT
         })
 
     if request.method == 'POST':
@@ -141,6 +176,7 @@ def order_cancel(request, pk):
     return render(request, "soccer/order_cancel_confirm.html", {
         "order": order,
         "error_message": error_message,
+        "DATE_TIME_FORMAT": DATE_TIME_FORMAT
     })
 
 

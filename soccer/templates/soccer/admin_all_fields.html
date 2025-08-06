@@ -6,69 +6,124 @@
 
 {% block content %}
 <div class="container py-4">
-  <h3 class="mb-4"><i class="bi bi-collection me-2"></i>{% trans "All Soccer Fields" %}</h3>
-  <a href="{% url 'admin_add_field' %}" class="btn btn-success mb-3">
-    <i class="bi bi-plus-lg me-1"></i> {% trans "Add Soccer Field" %}
-  </a>
-
-  <table class="table table-hover align-middle table-bordered">
-    <thead class="table-light">
-      <tr>
-        <th>#</th>
-        <th>{% trans 'Name' %}</th>
-        <th>{% trans 'Type' %}</th>
-        <th>{% trans 'Address' %}</th>
-        <th>{% trans 'Phone' %}</th>
-        <th>{% trans 'Email' %}</th>
-        <th>{% trans 'Price/hour' %}</th>
-        <th>{% trans 'Status' %}</th>
-        <th>{% trans 'Image' %}</th>
-        <th class="text-end">{% trans 'Actions' %}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for f in fields %}
-        <tr {% if f.deleted_at %}class="table-danger"{% endif %}>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ f.name|dash_if_none }}</td>
-          <td>{{ f.get_type_display|dash_if_none }}</td>
-          <td>{{ f.address|dash_if_none }}</td>
-          <td>{{ f.phone|dash_if_none }}</td>
-          <td>{{ f.email|dash_if_none }}</td>
-          <td>{{ f.price_per_hour|floatformat:0|dash_if_none|intcomma }}₫</td>
-          <td>
-            {% if f.deleted_at %}
-              <span class="badge bg-danger">{% trans "Deleted" %}</span>
-            {% else %}
-              <span class="badge {% if f.status == soccer_field_status.ACTIVE %}bg-success{% else %}bg-secondary{% endif %}">
-                {{ f.get_status_display }}
-              </span>
-            {% endif %}
-          </td>
-          <td>
-            {% if f.image %}
-              <img src="{{ f.image.url }}" style="max-width: 60px; max-height: 60px;" class="rounded shadow-sm" alt="field">
-            {% else %}
-              <span class="text-muted">-</span>
-            {% endif %}
-          </td>
-          <td class="text-end">
-            <a href="{% url 'admin_field_detail' f.pk %}" class="btn btn-sm btn-info">
-              <i class="bi bi-eye me-1"></i>{% trans "Detail" %}
-            </a>
-            <a href="{% url 'admin_edit_field' f.pk %}" class="btn btn-sm btn-warning">
-              <i class="bi bi-pencil me-1"></i>{% trans "Edit" %}
-            </a>
-          </td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="10" class="text-center text-muted">
-            <i class="bi bi-exclamation-circle me-1"></i> {% trans "No soccer fields found." %}
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">
+        <i class="bi bi-collection me-2"></i>{% trans "All Soccer Fields" %}
+      </h3>
+      <a href="{% url 'admin_add_field' %}" class="btn btn-success">
+        <i class="bi bi-plus-lg me-1"></i> {% trans "Add Soccer Field" %}
+      </a>
+    </div>
+    
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="ps-3">#</th>
+              <th>{% trans 'Name' %}</th>
+              <th>{% trans 'Type' %}</th>
+              <th>{% trans 'Address' %}</th>
+              <th>{% trans 'Phone' %}</th>
+              <th>{% trans 'Email' %}</th>
+              <th>{% trans 'Price/hour' %}</th>
+              <th>{% trans 'Status' %}</th>
+              <th>{% trans 'Image' %}</th>
+              <th class="text-end pe-3">{% trans 'Actions' %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for f in fields %}
+              <tr {% if f.deleted_at %}class="table-danger"{% endif %}>
+                <td class="ps-3">{{ forloop.counter }}</td>
+                <td>
+                  <span class="fw-bold">{{ f.name|dash_if_none }}</span>
+                </td>
+                <td><span class="badge bg-info text-dark">{{ f.get_type_display|dash_if_none }}</span></td>
+                <td>
+                  <span class="text-truncate d-inline-block" style="max-width: 150px;" title="{{ f.address }}">
+                    {{ f.address|dash_if_none }}
+                  </span>
+                </td>
+                <td>
+                  {% if f.phone %}
+                    <a href="tel:{{ f.phone }}" class="text-decoration-none">
+                      <i class="bi bi-telephone me-1 text-muted"></i>{{ f.phone }}
+                    </a>
+                  {% else %}
+                    <span class="text-muted">-</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if f.email %}
+                    <a href="mailto:{{ f.email }}" class="text-decoration-none">
+                      <i class="bi bi-envelope me-1 text-muted"></i>
+                      <span class="text-truncate d-inline-block" style="max-width: 120px;">{{ f.email }}</span>
+                    </a>
+                  {% else %}
+                    <span class="text-muted">-</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <span class="fw-bold text-success">
+                    {{ f.price_per_hour|floatformat:0|dash_if_none|intcomma }}
+                    <small>₫</small>
+                  </span>
+                </td>
+                <td>
+                  {% if f.deleted_at %}
+                    <span class="badge bg-danger">{% trans "Deleted" %}</span>
+                  {% else %}
+                    <span class="badge {% if f.status == soccer_field_status.ACTIVE %}bg-success{% else %}bg-secondary{% endif %}">
+                      {{ f.get_status_display }}
+                    </span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if f.image %}
+                    <div class="field-image-container">
+                      <img src="{{ f.image.url }}" class="field-thumbnail rounded shadow-sm" alt="{{ f.name }}">
+                      <div class="field-image-overlay">
+                        <a href="{{ f.image.url }}" target="_blank" class="text-white">
+                          <i class="bi bi-zoom-in"></i>
+                        </a>
+                      </div>
+                    </div>
+                  {% else %}
+                    <div class="field-placeholder rounded">
+                      <i class="bi bi-image text-muted"></i>
+                    </div>
+                  {% endif %}
+                </td>
+                <td class="text-end pe-3">
+                  <div class="btn-group">
+                    <a href="{% url 'admin_field_detail' f.pk %}" class="btn btn-sm btn-outline-info">
+                      <i class="bi bi-eye me-1"></i>{% trans "Detail" %}
+                    </a>
+                    <a href="{% url 'admin_edit_field' f.pk %}" class="btn btn-sm btn-outline-warning">
+                      <i class="bi bi-pencil me-1"></i>{% trans "Edit" %}
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="10" class="text-center py-5">
+                  <div class="empty-state">
+                    <i class="bi bi-layers fs-1 text-muted mb-3"></i>
+                    <p class="text-muted">{% trans "No soccer fields found." %}</p>
+                    <a href="{% url 'admin_add_field' %}" class="btn btn-outline-success mt-2">
+                      <i class="bi bi-plus-lg me-1"></i>{% trans "Add Your First Field" %}
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

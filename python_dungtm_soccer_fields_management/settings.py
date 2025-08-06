@@ -164,3 +164,6 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(hour=23, minute=59),  # 23:59 hàng ngày
     },
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

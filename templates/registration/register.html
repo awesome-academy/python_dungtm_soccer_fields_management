@@ -16,5 +16,10 @@
       </div>
     {% endfor %}
     <button type="submit" class="btn btn-primary w-100">{% trans 'Register' %}</button>
+    <div class="mt-3 text-center">
+      Have an account? 
+      {% comment %} Link to the login page {% endcomment %}
+      <a href="{% url 'login' %}" class="btn btn-outline-secondary">{% trans 'Login' %}</a>
+    </div>
   </form>
 {% endblock %}

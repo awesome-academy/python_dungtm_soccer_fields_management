@@ -13,35 +13,170 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
 
-  <body class="bg-light min-h-100">
-    <header class="fixed-top bg-white shadow-sm">
-      <div class="container-fluid px-4 py-2 d-flex align-items-center justify-content-between">
-        <span class="fw-bold fs-5">{% trans 'Soccer Fields Management' %}</span>
-        <div class="row align-items-center">
-          <div class="col-auto">
-            {% include 'language_selector.html' %}
-          </div>
-          {% if user.is_authenticated %}
-            <div class="col-auto">
-              <form action="{% url 'logout' %}" method="post" class="logout mb-0">
-                {% csrf_token %}
-                <button class="btn btn-outline-danger btn-sm">{% trans 'Logout' %}</button>
-              </form>
+  <body class="d-flex flex-column min-vh-100">
+    <header class="main-header fixed-top">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center brand-logo">
+            <i class="bi bi-dribbble me-2 fs-3"></i>
+            <span>{% trans 'Soccer Fields' %}</span>
+          </a>
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" 
+                  aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">
+                  <i class="bi bi-house-door me-1"></i>{% trans 'Home' %}
+                </a>
+              </li>
+              
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a href="{% url 'my_orders' %}" class="nav-link {% if request.path == '/my-orders/' %}active{% endif %}">
+                    <i class="bi bi-calendar-check me-1"></i>{% trans 'My Orders' %}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'create_field_request' %}" class="nav-link {% if request.path == '/field-requests/create/' %}active{% endif %}">
+                    <i class="bi bi-plus-circle me-1"></i>{% trans 'Request Field' %}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'my_field_requests' %}" class="nav-link {% if request.path == '/field-requests/' %}active{% endif %}">
+                    <i class="bi bi-file-earmark-text me-1"></i>{% trans 'My Field Requests' %}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'voucher_list' %}" class="nav-link {% if request.path == '/vouchers/' %}active{% endif %}">
+                    <i class="bi bi-ticket-perforated me-1"></i>{% trans 'Vouchers' %}
+                  </a>
+                </li>
+                
+                {% if user.is_staff %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-shield-lock me-1"></i>{% trans 'Admin' %}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                      <li>
+                        <a class="dropdown-item" href="{% url 'admin_field_requests' %}">
+                          <i class="bi bi-file-earmark-text me-2"></i>{% trans 'Field Requests' %}
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'voucher_list_admin' %}">
+                          <i class="bi bi-ticket-perforated me-2"></i>{% trans 'Manage Vouchers' %}
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'admin_all_fields' %}">
+                          <i class="bi bi-geo-alt me-2"></i>{% trans 'Manage Fields' %}
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'all_orders' %}">
+                          <i class="bi bi-list-check me-2"></i>{% trans 'All Orders' %}
+                        </a>
+                      </li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                        <a class="dropdown-item" href="#">
+                          <i class="bi bi-graph-up me-2"></i>{% trans 'Reports' %}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                {% endif %}
+              {% endif %}
+            </ul>
+            
+            <div class="d-flex align-items-center">
+              <div class="me-3">
+                {% include 'language_selector.html' %}
+              </div>
+              
+              {% if user.is_authenticated %}
+                <div class="dropdown">
+                  <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" 
+                     data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" 
+                         style="width: 35px; height: 35px;">
+                      {{ user.username|first|upper }}
+                    </div>
+                    <span class="ms-2 d-none d-sm-inline">{{ user.username }}</span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>{% trans 'Profile' %}</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>{% trans 'Settings' %}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <form action="{% url 'logout' %}" method="post" class="logout mb-0">
+                        {% csrf_token %}
+                        <button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>{% trans 'Logout' %}</button>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+              {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">
+                  <i class="bi bi-box-arrow-in-right me-1"></i>{% trans 'Login' %}
+                </a>
+                <a href="{% url 'register' %}" class="btn btn-primary">
+                  <i class="bi bi-person-plus me-1"></i>{% trans 'Register' %}
+                </a>
+              {% endif %}
             </div>
-          {% endif %}
-        </div>
+          </div>
+        </nav>
       </div>
     </header>
 
-    <div class="container my-4">
+    <div class="container content-wrapper flex-grow-1">
       {% block content %}
-
       {% endblock %}
     </div>
 
+    <footer class="site-footer mt-auto">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <h5 class="mb-3 text-light">{% trans 'Soccer Fields Management' %}</h5>
+            <p class="text-muted">{% trans 'Find and book the best soccer fields in your area.' %}</p>
+          </div>
+          <div class="col-md-4 mb-3 mb-md-0">
+            <h5 class="mb-3 text-light">{% trans 'Quick Links' %}</h5>
+            <ul class="list-unstyled">
+              <li><a href="{% url 'home' %}" class="text-decoration-none text-muted">{% trans 'Home' %}</a></li>
+              <li><a href="#" class="text-decoration-none text-muted">{% trans 'About Us' %}</a></li>
+              <li><a href="#" class="text-decoration-none text-muted">{% trans 'Contact' %}</a></li>
+              <li><a href="#" class="text-decoration-none text-muted">{% trans 'Terms of Service' %}</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5 class="mb-3 text-light">{% trans 'Connect With Us' %}</h5>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-light fs-4"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="text-light fs-4"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="text-light fs-4"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="text-light fs-4"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 pt-3 border-top border-secondary text-center text-muted">
+          <small>&copy; {% now "Y" %} {% trans 'Soccer Fields Management. All rights reserved.' %}</small>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     {% block custom_js %}
-
     {% endblock %}
   </body>
 </html>
